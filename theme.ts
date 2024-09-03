@@ -48,6 +48,12 @@ const theme = createTheme({
             color: "headingText",
             lineHeight: 26
         },
+        title: {
+            fontSize: 20,
+            fontWeight: 'normal',
+            color: "headingText",
+            lineHeight: 24
+        },
         body: {
             fontSize: 18,
             lineHeight: 24,

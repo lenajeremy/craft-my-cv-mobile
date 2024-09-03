@@ -83,21 +83,25 @@ export default function Home() {
               height={160}
               style={{ padding: 1.5 }}
             >
-              <Pressable onPress={() => router.push("/resumes")}>
-                <ImageBackground
-                  resizeMode="cover"
-                  source={require("@/assets/images/gradient-bg.png")}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    transform: [
-                      { rotate: "90deg" },
-                      { scale: 1.4 },
-                      { translateY: 20 },
-                    ],
-                  }}
-                  imageStyle={{ resizeMode: "cover" }}
-                />
+              <ImageBackground
+                resizeMode="cover"
+                source={require("@/assets/images/gradient-bg.png")}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  transform: [
+                    { rotate: "90deg" },
+                    { scale: 1.4 },
+                    { translateY: 20 },
+                  ],
+                }}
+                imageStyle={{ resizeMode: "cover" }}
+              />
+
+              <Pressable
+                onPress={() => router.push("/resumes")}
+                style={StyleSheet.absoluteFillObject}
+              >
                 <Box
                   zIndex={1}
                   p="m"
