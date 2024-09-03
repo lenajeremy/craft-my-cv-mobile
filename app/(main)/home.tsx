@@ -137,7 +137,7 @@ export default function Home() {
                 imageStyle={{ resizeMode: "cover" }}
               />
               <Box
-                bg="white"
+                bg="mainBackground"
                 width={"100%"}
                 height={"100%"}
                 borderRadius={14}

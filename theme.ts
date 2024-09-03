@@ -1,4 +1,4 @@
-import { createTheme } from '@shopify/restyle';
+import { color, createTheme } from '@shopify/restyle';
 
 const palette = {
     purple: '#6135FE',
@@ -66,5 +66,24 @@ const theme = createTheme({
     },
 });
 
-export type Theme = typeof theme;
+const darkTheme = {
+    ...theme,
+    colors: {
+        mainBackground: palette.dark,
+        mainText: palette.muted,
+        headingText: palette.white,
+        mutedText: palette.muted,
+        border: palette.muted,
+        primary: palette.purple,
+        primaryFaded: palette.purpleLight,
+        white: palette.white,
+        dark: palette.dark,
+    }
+}
+
+type Theme = typeof theme;
+export {
+    type Theme,
+    darkTheme
+}
 export default theme;
