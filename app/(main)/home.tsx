@@ -15,6 +15,7 @@ import HomeCardEdit from "@/assets/icons/home-card-edit";
 import EnvelopeSVG from "@/assets/icons/envelope";
 import { LinearGradient } from "expo-linear-gradient";
 import { ResumeCoverLetterTab } from "@/components/home";
+import { useRouter } from "expo-router";
 
 function LinearGradientIcon({ children }: { children: React.ReactNode }) {
   return (
@@ -62,6 +63,8 @@ function HomeHeading() {
 }
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <ScreenContainer>
       <Box px="default">
@@ -80,42 +83,45 @@ export default function Home() {
               height={160}
               style={{ padding: 1.5 }}
             >
-              <ImageBackground
-                resizeMode="cover"
-                source={require("@/assets/images/gradient-bg.png")}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  transform: [
-                    { rotate: "90deg" },
-                    { scale: 1.4 },
-                    { translateY: 20 },
-                  ],
-                }}
-                imageStyle={{ resizeMode: "cover" }}
-              />
-              <Box
-                zIndex={1}
-                p="m"
-                justifyContent="space-between"
-                style={{
-                  ...StyleSheet.absoluteFillObject,
-                  backgroundColor: "#6135FE52",
-                }}
-              >
-                <LinearGradientIcon>
-                  <HomeCardEdit />
-                </LinearGradientIcon>
-                <Box>
-                  <Text variant="h3" color="white">
-                    Create
-                  </Text>
-                  <Text variant="h2" color="white">
-                    Resume
-                  </Text>
+              <Pressable onPress={() => router.push("/resumes")}>
+                <ImageBackground
+                  resizeMode="cover"
+                  source={require("@/assets/images/gradient-bg.png")}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    transform: [
+                      { rotate: "90deg" },
+                      { scale: 1.4 },
+                      { translateY: 20 },
+                    ],
+                  }}
+                  imageStyle={{ resizeMode: "cover" }}
+                />
+                <Box
+                  zIndex={1}
+                  p="m"
+                  justifyContent="space-between"
+                  style={{
+                    ...StyleSheet.absoluteFillObject,
+                    backgroundColor: "#6135FE52",
+                  }}
+                >
+                  <LinearGradientIcon>
+                    <HomeCardEdit />
+                  </LinearGradientIcon>
+                  <Box>
+                    <Text variant="h3" color="white">
+                      Create
+                    </Text>
+                    <Text variant="h2" color="white">
+                      Resume
+                    </Text>
+                  </Box>
                 </Box>
-              </Box>
+              </Pressable>
             </Box>
+
             <Box
               flex={1}
               position="relative"
@@ -137,28 +143,34 @@ export default function Home() {
                 }}
                 imageStyle={{ resizeMode: "cover" }}
               />
-              <Box
-                bg="mainBackground"
-                width={"100%"}
-                height={"100%"}
-                borderRadius={14}
-                overflow="hidden"
-                p="m"
+
+              <Pressable
+                onPress={() => router.push("/cover-letters")}
+                style={{ width: "100%", height: "100%" }}
               >
-                <Box justifyContent="space-between" height={"100%"}>
-                  <LinearGradientIcon>
-                    <EnvelopeSVG />
-                  </LinearGradientIcon>
-                  <Box>
-                    <Text variant="h3" style={{ color: "#9578FE" }}>
-                      Create
-                    </Text>
-                    <Text variant="h2" style={{ color: "#4526B4" }}>
-                      Cover Letter
-                    </Text>
+                <Box
+                  bg="mainBackground"
+                  width={"100%"}
+                  height={"100%"}
+                  borderRadius={14}
+                  overflow="hidden"
+                  p="m"
+                >
+                  <Box justifyContent="space-between" height={"100%"}>
+                    <LinearGradientIcon>
+                      <EnvelopeSVG />
+                    </LinearGradientIcon>
+                    <Box>
+                      <Text variant="h3" style={{ color: "#9578FE" }}>
+                        Create
+                      </Text>
+                      <Text variant="h2" style={{ color: "#4526B4" }}>
+                        Cover Letter
+                      </Text>
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
+              </Pressable>
             </Box>
           </Box>
 
