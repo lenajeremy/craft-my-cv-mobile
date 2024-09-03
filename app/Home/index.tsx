@@ -2,6 +2,7 @@ import AppButton from "@/createCVComponents/Button";
 import { Text, View, StyleSheet, Image } from "react-native";
 import { useNavigation, useRouter } from "expo-router";
 import { useEffect } from "react";
+import ThemedText from "@/components/ui/text";
 
 function Home() {
   const navigation = useNavigation();
@@ -37,8 +38,8 @@ function Home() {
           marginLeft: 40,
         }}
       >
-        <Text style={[styles.text]}> Create Professional</Text>
-        <Text style={[styles.text]}> Resume In Minutes</Text>
+        <ThemedText variant="h1">Create Professional</ThemedText>
+        <Text style={[styles.text]}>Resume In Minutes</Text>
         <Text style={[styles.subText]}>
           Craft stunning, job-winning resumes with our AI-powered tools. Choose
           from a variety of templates and customize them to fit your career

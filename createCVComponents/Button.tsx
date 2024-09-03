@@ -1,6 +1,9 @@
 import { Pressable, StyleSheet, Text } from "react-native";
+import { useTheme } from "@shopify/restyle";
+import { Theme } from "@/theme";
 
 const AppButton = (props: any) => {
+  const { colors } = useTheme<Theme>();
   return (
     <Pressable
       style={({ pressed }) => [
@@ -8,8 +11,8 @@ const AppButton = (props: any) => {
           backgroundColor: props.disabled
             ? "#ccc"
             : pressed
-              ? "#aa0000"
-              : props.color || "#6135FE",
+            ? colors.primary + "10"
+            : props.color || colors.primary,
         },
         styles.container,
         props.buttonStyles,
