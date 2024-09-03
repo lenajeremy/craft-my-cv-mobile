@@ -1,17 +1,18 @@
 import Svg, { Path } from "react-native-svg";
 
-export type SvgProps = {
+export type IconProps = {
     width?: number;
     height?: number;
     color?: string;
 }
-const defaultProps: SvgProps = {
+
+export const defaultIconProps: IconProps = {
     width: 32,
     height: 32,
     color: "#815DFE"
 }
 
-export default function UserCircleSVG({ width, height, color }: SvgProps = defaultProps) {
+export default function UserCircleSVG({ width, height, color }: IconProps = defaultIconProps) {
   return (
     <Svg
       width={width}

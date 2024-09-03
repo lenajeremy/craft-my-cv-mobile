@@ -14,6 +14,7 @@ import { Link } from "expo-router";
 import HomeCardEdit from "@/assets/icons/home-card-edit";
 import EnvelopeSVG from "@/assets/icons/envelope";
 import { LinearGradient } from "expo-linear-gradient";
+import { ResumeCoverLetterTab } from "@/components/home";
 
 function LinearGradientIcon({ children }: { children: React.ReactNode }) {
   return (
@@ -162,24 +163,7 @@ export default function Home() {
           </Box>
 
           <Box py="default">
-            <Text>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit
-              aut ducimus distinctio, necessitatibus voluptate voluptatum sint
-              mollitia est eligendi sequi culpa, fugit facere, ab id incidunt?
-              Expedita vel eius esse!
-            </Text>
-            <Text>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit
-              aut ducimus distinctio, necessitatibus voluptate voluptatum sint
-              mollitia est eligendi sequi culpa, fugit facere, ab id incidunt?
-              Expedita vel eius esse!
-            </Text>
-            <Text>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit
-              aut ducimus distinctio, necessitatibus voluptate voluptatum sint
-              mollitia est eligendi sequi culpa, fugit facere, ab id incidunt?
-              Expedita vel eius esse!
-            </Text>
+            <ResumeCoverLetterTab />
           </Box>
         </ScrollView>
       </Box>

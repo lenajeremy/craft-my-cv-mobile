@@ -49,7 +49,7 @@ const theme = createTheme({
             lineHeight: 26
         },
         body: {
-            fontSize: 16,
+            fontSize: 18,
             lineHeight: 24,
             color: "mainText"
         },
@@ -59,7 +59,7 @@ const theme = createTheme({
             color: "mutedText"
         },
         defaults: {
-            fontSize: 16,
+            fontSize: 18,
             lineHeight: 24,
             color: "mainText"
         },
