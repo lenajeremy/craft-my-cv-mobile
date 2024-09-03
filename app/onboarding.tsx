@@ -4,19 +4,19 @@ import { useNavigation, useRouter } from "expo-router";
 import { useEffect } from "react";
 import ThemedText from "@/components/ui/text";
 
-function Home() {
+function Onboarding() {
   const navigation = useNavigation();
   const router = useRouter();
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
+  
   return (
     <View
       style={{
         flex: 1,
         justifyContent: "center",
-        // alignItems: "center",
         width: "100%",
         backgroundColor: "#FFFFFF",
       }}
@@ -52,7 +52,7 @@ function Home() {
           color="white"
           textStyles="#6135FE"
           onPress={() => {
-            router.push("/Signup");
+            router.push("/signup");
           }}
         >
           Sign In
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default Onboarding;

@@ -1,16 +1,15 @@
-import { View } from "react-native";
-import Home from "./Home";
+import React from "react";
+import { Redirect } from "expo-router";
 
-export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Home />
-    </View>
-  );
+export default function App() {
+  const isLoggedIn = true;
+  const isFirstTime = false;
+
+  if (isFirstTime) {
+    return <Redirect href="/onboarding" />;
+  } else if (isLoggedIn) {
+    return <Redirect href="/home" />;
+  } else {
+    return <Redirect href="/signin" />;
+  }
 }

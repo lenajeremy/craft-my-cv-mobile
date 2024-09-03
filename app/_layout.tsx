@@ -5,10 +5,11 @@ import theme from "@/theme";
 export default function RootLayout() {
   return (
     <ThemeProvider theme={theme}>
-    <Stack>
-      <Stack.Screen name="Home/index" />
-      <Stack.Screen name="Signup/index" />
-    </Stack>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(auth)"/>
+        <Stack.Screen name="(main)"/>
+      </Stack>
     </ThemeProvider>
   );
 }

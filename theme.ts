@@ -32,11 +32,11 @@ const theme = createTheme({
             color: "headingText",
             lineHeight: 32,
         },
-        h2: {
-            fontWeight: "bold",
-            fontSize: 21,
+        h3: {
+            fontWeight: "600",
+            fontSize: 20,
             color: "headingText",
-            lineHeight: 28
+            lineHeight: 26
         },
         body: {
             fontSize: 16,
