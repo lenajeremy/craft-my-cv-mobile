@@ -1,10 +1,11 @@
 import AppButton from "@/createCVComponents/Button";
 import { Text, View, StyleSheet, Image } from "react-native";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import { useEffect } from "react";
 
-export default function Home() {
+function Home() {
   const navigation = useNavigation();
+  const router = useRouter();
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -46,7 +47,13 @@ export default function Home() {
       </View>
       <View style={{ alignSelf: "center" }}>
         <AppButton marginBottom={20}>Get Started</AppButton>
-        <AppButton color="white" textStyles="#6135FE">
+        <AppButton
+          color="white"
+          textStyles="#6135FE"
+          onPress={() => {
+            router.push("/Signup");
+          }}
+        >
           Sign In
         </AppButton>
       </View>
@@ -67,3 +74,5 @@ const styles = StyleSheet.create({
     width: 320,
   },
 });
+
+export default Home;
