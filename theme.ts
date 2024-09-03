@@ -17,24 +17,34 @@ const theme = createTheme({
         mutedText: palette.muted,
         border: palette.muted,
         primary: palette.purple,
-        primaryFaded: palette.purpleLight
+        primaryFaded: palette.purpleLight,
+        white: palette.white,
+        dark: palette.dark,
     },
     spacing: {
+        xs: 4,
         s: 8,
         m: 16,
-        l: 24,
+        default: 20,
+        l: 28,
         xl: 40,
     },
     textVariants: {
         h1: {
             fontWeight: 'bold',
-            fontSize: 28,
+            fontSize: 30,
             color: "headingText",
-            lineHeight: 32,
+            lineHeight: 40,
+        },
+        h2: {
+            fontWeight: 'bold',
+            fontSize: 26,
+            color: 'headingText',
+            lineHeight: 32
         },
         h3: {
-            fontWeight: "600",
-            fontSize: 20,
+            fontWeight: "bold",
+            fontSize: 22,
             color: "headingText",
             lineHeight: 26
         },
