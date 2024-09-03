@@ -1,4 +1,4 @@
-import AppButton from "@/createCVComponents/Button";
+import Button from "@/components/ui/button";
 import { Text, View, StyleSheet, Image } from "react-native";
 import { useNavigation, useRouter } from "expo-router";
 import { useEffect } from "react";
@@ -47,8 +47,8 @@ function Home() {
         </Text>
       </View>
       <View style={{ alignSelf: "center" }}>
-        <AppButton marginBottom={20}>Get Started</AppButton>
-        <AppButton
+        <Button marginBottom={20}>Get Started</Button>
+        <Button
           color="white"
           textStyles="#6135FE"
           onPress={() => {
@@ -56,7 +56,7 @@ function Home() {
           }}
         >
           Sign In
-        </AppButton>
+        </Button>
       </View>
     </View>
   );

@@ -1,5 +1,4 @@
-import AppButton from "@/createCVComponents/Button";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import Home from "./Home";
 
 export default function Index() {

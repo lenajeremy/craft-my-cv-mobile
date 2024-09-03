@@ -1,5 +1,4 @@
-import AppButton from "@/createCVComponents/Button";
-import { Text, View, StyleSheet, Image, TextInput } from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
 import { useNavigation } from "expo-router";
 import { useEffect } from "react";
 import TextComponent from "@/components/TextComponent";
