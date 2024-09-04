@@ -8,7 +8,7 @@ import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
 import Text from "./text";
 import { useMemo } from "react";
-
+import Box from "./box";
 
 export type ButtonProps = {
   disabled?: boolean;
@@ -19,6 +19,7 @@ export type ButtonProps = {
   children?: React.ReactNode;
   accessibilityLabel?: string;
   textColor: string;
+  icon?: React.ReactNode;
 };
 
 const Button = (props: ButtonProps) => {
@@ -67,12 +68,15 @@ const Button = (props: ButtonProps) => {
       accessible
       accessibilityLabel={props.accessibilityLabel || "A Button"}
     >
-      <Text
-        fontWeight="700"
-        style={[styles.text, { color: props.textColor || "white" }]}
-      >
-        {props.children || "Press Me"}
-      </Text>
+      <Box flexDirection="row" alignItems="center" gap="s">
+        {props.icon && props.icon}
+        <Text
+          fontWeight="700"
+          style={[styles.text, { color: props.textColor || "white" }]}
+        >
+          {props.children || "Press Me"}
+        </Text>
+      </Box>
     </Pressable>
   );
 };
