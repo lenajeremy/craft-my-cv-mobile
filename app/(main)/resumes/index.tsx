@@ -3,19 +3,34 @@ import Box from "@/components/ui/box";
 import PageHeader from "@/components/ui/page-header";
 import ScreenContainer from "@/components/ui/screen-container";
 import Text from "@/components/ui/text";
-import { Alert, ScrollView, useWindowDimensions } from "react-native";
+import { ScrollView, useWindowDimensions } from "react-native";
 import ResumeTemplatePreview from "@/components/resume-template-preview";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
 import Button from "@/components/ui/button";
+import { useRouter } from "expo-router";
+import { slugify } from "@/utils/text";
+
 
 export default function Resumes() {
   const { width } = useWindowDimensions();
   const { spacing } = useTheme<Theme>();
   const templateWidth = (width - spacing.default * 2) * 0.9;
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
+  const router = useRouter();
 
-  const onSelectTemplate = () => {};
+  const onSelectTemplate = () => {
+    
+    if (!selectedTemplate) {
+      return;
+    }
+
+    // speak to the backend to create the resume
+    // get the resume id.. for now we'll just use the template name slug
+    const slug = slugify(selectedTemplate);
+
+    router.replace(`/resumes/${slug}/edit`)
+  };
 
   return (
     <ScreenContainer>

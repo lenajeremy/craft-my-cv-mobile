@@ -17,7 +17,7 @@ export default function PageHeader({ title }: { title: string }) {
       py="default"
       alignItems="center"
       flexDirection="row"
-      justifyContent="space-between"
+      justifyContent={showBackButton ? "space-between" : "center"}
     >
       {showBackButton && (
         <Pressable onPress={router.back}>
@@ -29,7 +29,11 @@ export default function PageHeader({ title }: { title: string }) {
         {title}
       </Text>
 
-      <Box>{/* Empty box */}</Box>
+      {showBackButton && (
+        <Pressable onPress={router.back} disabled style = {{ opacity: 0}}>
+          <ArrowLeftSVG height={24} width={24} color={colors.headingText} />
+        </Pressable>
+      )}
     </Box>
   );
 }

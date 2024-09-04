@@ -19,7 +19,6 @@ export function ResumeCoverLetterTab() {
           <Pressable onPress={() => setSelectedTab("resume")}>
             <Box>
               <Text
-                onLayout={(e) => console.log(e.nativeEvent.layout)}
                 variant="h2"
                 color={selectedTab === "resume" ? "headingText" : "mutedText"}
               >
@@ -31,7 +30,6 @@ export function ResumeCoverLetterTab() {
           <Pressable onPress={() => setSelectedTab("cover-letter")}>
             <Box>
               <Text
-                onLayout={(e) => console.log(e.nativeEvent.layout)}
                 variant="h2"
                 color={
                   selectedTab === "cover-letter" ? "headingText" : "mutedText"

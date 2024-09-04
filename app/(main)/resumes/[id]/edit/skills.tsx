@@ -1,15 +1,19 @@
 import Box from "@/components/ui/box";
+import PageHeader from "@/components/ui/page-header";
 import ScreenContainer from "@/components/ui/screen-container";
 import Text from "@/components/ui/text";
 import { useLocalSearchParams } from "expo-router";
 
-export default function ResumeEdit() {
+export default function Skills() {
   const { id } = useLocalSearchParams();
 
   return (
     <ScreenContainer>
       <Box px="default">
-        <Text variant="h1">Editing Resume with ID: {id}</Text>
+        <PageHeader title="Skills" />
+        <Box>
+          <Text variant="h1">Skills for {id}</Text>
+        </Box>
       </Box>
     </ScreenContainer>
   );

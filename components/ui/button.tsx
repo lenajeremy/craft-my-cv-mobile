@@ -46,7 +46,7 @@ const Button = (props: ButtonProps) => {
         },
         text: { fontSize: 18 },
       }),
-    []
+    [colors]
   );
 
   return (
