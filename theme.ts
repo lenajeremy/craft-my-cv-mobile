@@ -1,12 +1,14 @@
-import { color, createTheme } from '@shopify/restyle';
+import { createTheme } from '@shopify/restyle';
 
 const palette = {
     purple: '#6135FE',
-    purpleLight: "#7254DC",
+    purple2: "#7254DC",
+    purpleLight: "#CEC0FF",
     dark: "#1F242C",
     white: '#FFFFFF',
     neutral: "#4A5568",
     muted: "#7C8289",
+    lightGray: "#EFEBFF"
 };
 
 const theme = createTheme({
@@ -15,8 +17,9 @@ const theme = createTheme({
         mainText: palette.neutral,
         headingText: palette.dark,
         mutedText: palette.muted,
-        border: palette.muted,
+        border: palette.lightGray,
         primary: palette.purple,
+        primary2: palette.purple2,
         primaryFaded: palette.purpleLight,
         white: palette.white,
         dark: palette.dark,
@@ -81,7 +84,8 @@ const darkTheme = {
         mutedText: palette.muted,
         border: palette.muted,
         primary: palette.purple,
-        primaryFaded: palette.purpleLight,
+        primary2: palette.purple2,
+        primaryFaded: palette.purple2,
         white: palette.white,
         dark: palette.dark,
     }

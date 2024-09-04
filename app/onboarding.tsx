@@ -50,7 +50,7 @@ function Onboarding() {
         <Button marginBottom={20}>Get Started</Button>
         <Button
           color="white"
-          textStyles="#6135FE"
+          textColor="#6135FE"
           onPress={() => {
             router.push("/signup");
           }}

@@ -21,7 +21,7 @@ export default function PageHeader({ title }: { title: string }) {
     >
       {showBackButton && (
         <Pressable onPress={router.back}>
-          <ArrowLeftSVG height={26} width={26} color={colors.headingText} />
+          <ArrowLeftSVG height={24} width={24} color={colors.headingText} />
         </Pressable>
       )}
 

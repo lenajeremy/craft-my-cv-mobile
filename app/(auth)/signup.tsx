@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, Image } from "react-native";
 import { useNavigation } from "expo-router";
 import { useEffect } from "react";
-import TextComponent from "@/components/TextComponent";
+
 
 export default function Signup() {
   const navigation = useNavigation();
@@ -34,7 +34,6 @@ export default function Signup() {
         <Text style={{ fontSize: 24, marginBottom: 40 }}>
           Create An Account
         </Text>
-        <TextComponent label={"Name"} />
       </View>
     </View>
   );
