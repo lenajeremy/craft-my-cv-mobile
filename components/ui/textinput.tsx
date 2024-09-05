@@ -24,7 +24,7 @@ export default function TextInput(props: TextInputProps) {
       StyleSheet.create({
         textInput: {
           ...textVariants.title,
-          paddingTop: spacing.s,
+          paddingTop: spacing.m,
           paddingBottom: spacing.s,
         },
       }),
