@@ -42,12 +42,11 @@ export default function Skills() {
   }, [search, allSkills]);
 
   return (
-    <ScreenContainer>
-      <Box px="default" height={'100%'}>
-        <PageHeader title="Skills" />
-        <Box justifyContent="space-between" pb="s" flex={1}>
-          <Box gap="m">
+    <ScreenContainer headerTitle="Skills" showHeaderTitle>
+      <Box justifyContent="space-between" pb="s" flex={1}>
+        <Box gap="m">
           <TextInput
+            autoFocus
             showLabel
             label="What are your skills?"
             value={search}
@@ -57,20 +56,19 @@ export default function Skills() {
           <Box gap="s" flexDirection="row" flexWrap="wrap">
             {skills.map((skill) => (
               <Box borderWidth={1.5} borderColor="border" p="s" key={skill}>
-                <Text>{skill}</Text>
+                <Text variant="small">{skill}</Text>
               </Box>
             ))}
           </Box>
-          </Box>
+        </Box>
 
-          <Box alignItems="center">
-            <Button
-              textColor="white"
-              onPress={() => router.push("./professional-summary")}
-            >
-              Save
-            </Button>
-          </Box>
+        <Box alignItems="center">
+          <Button
+            textColor="white"
+            onPress={() => router.push("./professional-summary")}
+          >
+            Save
+          </Button>
         </Box>
       </Box>
     </ScreenContainer>

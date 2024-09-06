@@ -1,4 +1,11 @@
 import * as React from "react";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  SafeAreaView,
+  View,
+} from "react-native";
 import Box from "@/components/ui/box";
 import Button from "@/components/ui/button";
 import PageHeader from "@/components/ui/page-header";
@@ -21,54 +28,59 @@ export default function PersonalInformation() {
   };
 
   return (
-    <ScreenContainer>
-      <Box px="default">
-        <PageHeader title="Personal Information" />
-        <Box height={"90%"} justifyContent="space-between">
-          <Box gap="m">
-            <TextInput
-              showLabel
-              label="Full name"
-              placeholder="John Doe"
-              onChangeText={(text) => onChangeText("fullName", text)}
-            />
+    <ScreenContainer
+      scrollable
+      showHeaderTitle
+      headerTitle="Personal Information"
+      ScreenFooterComponent={
+        <Button
+          disabled
+          onPress={() => {}}
+          textColor="white"
+          buttonStyles={{ alignSelf: "center", marginVertical: 8 }}
+        >
+          Next
+        </Button>
+      }
+    >
+      <Box gap="m">
+        <TextInput
+          autoFocus
+          showLabel
+          label="Full name"
+          placeholder="John Doe"
+          onChangeText={(text) => onChangeText("fullName", text)}
+        />
 
-            <TextInput
-              showLabel
-              label="Desired Job Title"
-              placeholder="What job title are you looking for?"
-              onChangeText={(text) => onChangeText("fullName", text)}
-            />
+        <TextInput
+          showLabel
+          label="Desired Job Title"
+          placeholder="What job title are you looking for?"
+          onChangeText={(text) => onChangeText("fullName", text)}
+        />
 
-            <TextInput
-              showLabel
-              label="Phone Number"
-              placeholder="+234 9066334521"
-              onChangeText={(text) => onChangeText("phoneNumber", text)}
-            />
+        <TextInput
+          showLabel
+          label="Phone Number"
+          placeholder="+234 9066334521"
+          onChangeText={(text) => onChangeText("phoneNumber", text)}
+        />
 
-            <TextInput
-              showLabel
-              label="Email"
-              placeholder="johndoe@crafymycv.com"
-              onChangeText={(text) => onChangeText("email", text)}
-              keyboardType="email-address"
-            />
+        <TextInput
+          showLabel
+          label="Email"
+          placeholder="johndoe@crafymycv.com"
+          onChangeText={(text) => onChangeText("email", text)}
+          keyboardType="email-address"
+        />
 
-            <TextInput
-              showLabel
-              label="Location"
-              placeholder="Lagos, NG"
-              onChangeText={(text) => onChangeText("location", text)}
-              keyboardType="email-address"
-            />
-          </Box>
-          <Box alignItems="center">
-            <Button disabled onPress={() => {}} textColor="white">
-              Next
-            </Button>
-          </Box>
-        </Box>
+        <TextInput
+          showLabel
+          label="Location"
+          placeholder="Lagos, NG"
+          onChangeText={(text) => onChangeText("location", text)}
+          keyboardType="email-address"
+        />
       </Box>
     </ScreenContainer>
   );

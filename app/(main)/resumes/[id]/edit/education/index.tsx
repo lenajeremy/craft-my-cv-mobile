@@ -8,7 +8,6 @@ import { Theme } from "@/theme";
 import { useTheme } from "@shopify/restyle";
 import { useRouter } from "expo-router";
 
-
 export default function Education() {
   const schools = ["Princeton University", "University of Lagos"];
 
@@ -16,24 +15,21 @@ export default function Education() {
   const router = useRouter();
 
   return (
-    <ScreenContainer>
-      <Box px="default">
-        <PageHeader title="Work Experience" />
-        <Box gap="m" mt="default">
-          {schools.map((school, i) => (
-            <CardLink href={`./edit`} title={school} key={school} />
-          ))}
+    <ScreenContainer showHeaderTitle headerTitle="Education">
+      <Box gap="m" mt="default">
+        {schools.map((school, i) => (
+          <CardLink href={`./edit`} title={school} key={school} />
+        ))}
 
-          <Box alignItems="center" mt="l">
-            <Button
-              color="white"
-              textColor={colors.primary}
-              onPress={() => router.push("./edit")}
-              icon={<PlusSVG />}
-            >
-              Add Another
-            </Button>
-          </Box>
+        <Box alignItems="center" mt="l">
+          <Button
+            color="white"
+            textColor={colors.primary}
+            onPress={() => router.push("./edit")}
+            icon={<PlusSVG />}
+          >
+            Add Another
+          </Button>
         </Box>
       </Box>
     </ScreenContainer>

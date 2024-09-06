@@ -25,6 +25,7 @@ const theme = createTheme({
         dark: palette.dark,
     },
     spacing: {
+        line: 2,
         xs: 4,
         s: 8,
         m: 16,

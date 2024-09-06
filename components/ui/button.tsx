@@ -32,7 +32,7 @@ const Button = (props: ButtonProps) => {
           padding: 8,
           alignItems: "center",
           borderRadius: 32,
-          width: 320,
+          width: "100%",
           height: 60,
           display: "flex",
           justifyContent: "center",

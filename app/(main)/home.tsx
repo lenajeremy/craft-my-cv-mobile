@@ -4,7 +4,6 @@ import Text from "@/components/ui/text";
 import ScreenContainer from "@/components/ui/screen-container";
 import {
   StyleSheet,
-  ScrollView,
   Image,
   Pressable,
   ImageBackground,
@@ -66,122 +65,117 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <ScreenContainer>
-      <Box px="default">
-        <HomeHeading />
-        <ScrollView>
-          <Box py="l">
-            <Text variant="h1">Ready to Build Your {"\n"}Next Resume?</Text>
-          </Box>
+    <ScreenContainer ScreenHeaderComponent={<HomeHeading />} scrollable>
+      <Box py="l">
+        <Text variant="h1">Ready to Build Your {"\n"}Next Resume?</Text>
+      </Box>
 
-          <Box flexDirection="row" gap="m">
+      <Box flexDirection="row" gap="m">
+        <Box
+          flex={1}
+          position="relative"
+          borderRadius={16}
+          overflow="hidden"
+          height={160}
+          style={{ padding: 1.5 }}
+        >
+          <ImageBackground
+            resizeMode="cover"
+            source={require("@/assets/images/gradient-bg.png")}
+            style={{
+              width: "100%",
+              height: "100%",
+              transform: [
+                { rotate: "90deg" },
+                { scale: 1.4 },
+                { translateY: 20 },
+              ],
+            }}
+            imageStyle={{ resizeMode: "cover" }}
+          />
+
+          <Pressable
+            onPress={() => router.push("/resumes")}
+            style={StyleSheet.absoluteFillObject}
+          >
             <Box
-              flex={1}
-              position="relative"
-              borderRadius={16}
-              overflow="hidden"
-              height={160}
-              style={{ padding: 1.5 }}
+              zIndex={1}
+              p="m"
+              justifyContent="space-between"
+              style={{
+                ...StyleSheet.absoluteFillObject,
+                backgroundColor: "#6135FE52",
+              }}
             >
-              <ImageBackground
-                resizeMode="cover"
-                source={require("@/assets/images/gradient-bg.png")}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  transform: [
-                    { rotate: "90deg" },
-                    { scale: 1.4 },
-                    { translateY: 20 },
-                  ],
-                }}
-                imageStyle={{ resizeMode: "cover" }}
-              />
-
-              <Pressable
-                onPress={() => router.push("/resumes")}
-                style={StyleSheet.absoluteFillObject}
-              >
-                <Box
-                  zIndex={1}
-                  p="m"
-                  justifyContent="space-between"
-                  style={{
-                    ...StyleSheet.absoluteFillObject,
-                    backgroundColor: "#6135FE52",
-                  }}
-                >
-                  <LinearGradientIcon>
-                    <HomeCardEdit />
-                  </LinearGradientIcon>
-                  <Box>
-                    <Text variant="h3" color="white">
-                      Create
-                    </Text>
-                    <Text variant="h2" color="white">
-                      Resume
-                    </Text>
-                  </Box>
-                </Box>
-              </Pressable>
+              <LinearGradientIcon>
+                <HomeCardEdit />
+              </LinearGradientIcon>
+              <Box>
+                <Text variant="h3" color="white">
+                  Create
+                </Text>
+                <Text variant="h2" color="white">
+                  Resume
+                </Text>
+              </Box>
             </Box>
+          </Pressable>
+        </Box>
 
+        <Box
+          flex={1}
+          position="relative"
+          height={160}
+          borderRadius={16}
+          overflow="hidden"
+          alignItems="center"
+          justifyContent="center"
+          style={{ padding: 1.5 }}
+        >
+          <ImageBackground
+            resizeMode="cover"
+            source={require("@/assets/images/gradient-bg.png")}
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              width: "100%",
+              height: "100%",
+              transform: [{ scale: 1.4 }, { translateY: 20 }],
+            }}
+            imageStyle={{ resizeMode: "cover" }}
+          />
+
+          <Pressable
+            onPress={() => router.push("/cover-letters")}
+            style={{ width: "100%", height: "100%" }}
+          >
             <Box
-              flex={1}
-              position="relative"
-              height={160}
-              borderRadius={16}
+              bg="mainBackground"
+              width={"100%"}
+              height={"100%"}
+              borderRadius={14}
               overflow="hidden"
-              alignItems="center"
-              justifyContent="center"
-              style={{ padding: 1.5 }}
+              p="m"
             >
-              <ImageBackground
-                resizeMode="cover"
-                source={require("@/assets/images/gradient-bg.png")}
-                style={{
-                  ...StyleSheet.absoluteFillObject,
-                  width: "100%",
-                  height: "100%",
-                  transform: [{ scale: 1.4 }, { translateY: 20 }],
-                }}
-                imageStyle={{ resizeMode: "cover" }}
-              />
-
-              <Pressable
-                onPress={() => router.push("/cover-letters")}
-                style={{ width: "100%", height: "100%" }}
-              >
-                <Box
-                  bg="mainBackground"
-                  width={"100%"}
-                  height={"100%"}
-                  borderRadius={14}
-                  overflow="hidden"
-                  p="m"
-                >
-                  <Box justifyContent="space-between" height={"100%"}>
-                    <LinearGradientIcon>
-                      <EnvelopeSVG />
-                    </LinearGradientIcon>
-                    <Box>
-                      <Text variant="h3" style={{ color: "#9578FE" }}>
-                        Create
-                      </Text>
-                      <Text variant="h2" style={{ color: "#4526B4" }}>
-                        Cover Letter
-                      </Text>
-                    </Box>
-                  </Box>
+              <Box justifyContent="space-between" height={"100%"}>
+                <LinearGradientIcon>
+                  <EnvelopeSVG />
+                </LinearGradientIcon>
+                <Box>
+                  <Text variant="h3" style={{ color: "#9578FE" }}>
+                    Create
+                  </Text>
+                  <Text variant="h2" style={{ color: "#4526B4" }}>
+                    Cover Letter
+                  </Text>
                 </Box>
-              </Pressable>
+              </Box>
             </Box>
-          </Box>
+          </Pressable>
+        </Box>
+      </Box>
 
-          <Box py="default">
-            <ResumeCoverLetterTab />
-          </Box>
-        </ScrollView>
+      <Box py="default">
+        <ResumeCoverLetterTab />
       </Box>
     </ScreenContainer>
   );
