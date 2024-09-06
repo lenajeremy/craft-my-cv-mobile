@@ -10,8 +10,8 @@ export function ResumeCoverLetterTab() {
   const [selectedTab, setSelectedTab] = useState<"resume" | "cover-letter">(
     "resume"
   );
-  const [resumes, setResumes] = useState<any[]>([]);
-  const [coverLetters, setCoverLetters] = useState<any[]>([]);
+  const [resumes] = useState<any[]>([]);
+  const [coverLetters] = useState<any[]>([]);
 
   return (
     <Box>

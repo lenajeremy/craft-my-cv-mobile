@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Box from "@/components/ui/box";
 import ScreenContainer from "@/components/ui/screen-container";
 import Text from "@/components/ui/text";
 import { ScrollView, useWindowDimensions } from "react-native";

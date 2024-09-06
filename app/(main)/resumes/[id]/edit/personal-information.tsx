@@ -1,20 +1,10 @@
 import * as React from "react";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  SafeAreaView,
-  View,
-} from "react-native";
 import Box from "@/components/ui/box";
 import Button from "@/components/ui/button";
-import PageHeader from "@/components/ui/page-header";
 import ScreenContainer from "@/components/ui/screen-container";
 import TextInput from "@/components/ui/textinput";
-// import { useLocalSearchParams } from "expo-router";
 
 export default function PersonalInformation() {
-  // const { id } = useLocalSearchParams();
   const [formValues, setFormValues] = React.useState({
     fullName: "",
     jobTitle: "",
