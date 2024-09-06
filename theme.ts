@@ -36,41 +36,41 @@ const theme = createTheme({
     textVariants: {
         h1: {
             fontWeight: 'bold',
-            fontSize: 30,
+            fontSize: 24,
             color: "headingText",
-            lineHeight: 40,
+            lineHeight: 30,
         },
         h2: {
             fontWeight: 'bold',
-            fontSize: 26,
+            fontSize: 22,
             color: 'headingText',
-            lineHeight: 32
+            lineHeight: 26
         },
         h3: {
             fontWeight: "bold",
-            fontSize: 22,
+            fontSize: 20,
             color: "headingText",
             lineHeight: 26
         },
         title: {
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: 'normal',
             color: "headingText",
-            lineHeight: 28
+            lineHeight: 26
         },
         body: {
-            fontSize: 18,
-            lineHeight: 24,
+            fontSize: 16,
+            lineHeight: 20,
             color: "mainText"
         },
         small: {
-            fontSize: 14,
-            lineHeight: 20,
+            fontSize: 13,
+            lineHeight: 18,
             color: "mutedText"
         },
         defaults: {
-            fontSize: 18,
-            lineHeight: 24,
+            fontSize: 16,
+            lineHeight: 20,
             color: "mainText"
         },
     },

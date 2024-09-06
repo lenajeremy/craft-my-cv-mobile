@@ -1,64 +1,93 @@
 import Button from "@/components/ui/button";
-import { Text, View, StyleSheet, Image } from "react-native";
-import { useNavigation, useRouter } from "expo-router";
-import { useEffect } from "react";
-import ThemedText from "@/components/ui/text";
+import {
+  StyleSheet,
+  ScrollView,
+  useWindowDimensions,
+  SafeAreaView,
+} from "react-native";
+import Text from "@/components/ui/text";
+import Box from "@/components/ui/box";
+import OnboardingSvg1 from "@/assets/icons/onboarding-svg-1";
+import OnboardingSvg2 from "@/assets/icons/onboarding-svg-2";
+import OnboardingSvg3 from "@/assets/icons/onboarding-svg-3";
+import { useTheme } from "@shopify/restyle";
+import { Theme } from "@/theme";
+import { router } from "expo-router";
 
 function Onboarding() {
-  const navigation = useNavigation();
-  const router = useRouter();
+  const pages: OnboardinPageProps[] = [
+    {
+      title: "Create Professional Resumes in Minutes",
+      subtitle:
+        "Craft stunning, job-winning resumes with our AI-powered tools. Choose from a variety them to fit your career goals.",
+      isLast: false,
+      image: <OnboardingSvg1 width={270} height={270} />,
+      color: "hotpink",
+    },
+    {
+      title: "Crafted Templates for Every Career Path",
+      subtitle:
+        "Choose from a variety of templates and customize them to fit your career goals. Whether you're in tech or healthcare.",
+      isLast: false,
+      image: <OnboardingSvg2 width={270} height={270} />,
+      color: "blue",
+    },
+    {
+      title: "Optimize Your Resume with AI Insights",
+      subtitle:
+        "Get real-time feedback on your resume's content, layout, and keywords. Ensure your resume passes through ATS with ease.",
+      isLast: true,
+      image: <OnboardingSvg3 width={270} height={270} />,
+      color: "green",
+    },
+  ];
 
-  useEffect(() => {
-    navigation.setOptions({ headerShown: false });
-  }, [navigation]);
-  
+  const { colors } = useTheme<Theme>();
+
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
-        justifyContent: "center",
-        width: "100%",
-        backgroundColor: "#FFFFFF",
+        backgroundColor: colors.mainBackground,
+        position: "relative",
       }}
     >
-      <Image
-        source={require("@/assets/images/caro1.png")}
-        style={{ width: 250, height: 250, alignSelf: "center" }}
-        alt="any"
-      />
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          marginBottom: 70,
-          marginTop: 20,
-          justifyContent: "flex-start",
-          alignContent: "flex-start",
-          alignItems: "flex-start",
-          marginLeft: 40,
-        }}
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
       >
-        <ThemedText variant="h1">Create Professional</ThemedText>
-        <Text style={[styles.text]}>Resume In Minutes</Text>
-        <Text style={[styles.subText]}>
-          Craft stunning, job-winning resumes with our AI-powered tools. Choose
-          from a variety of templates and customize them to fit your career
-          goals.
-        </Text>
-      </View>
-      <View style={{ alignSelf: "center" }}>
-        <Button marginBottom={20}>Get Started</Button>
+        {pages.map((page) => (
+          <OnboardingPage {...page} key={page.title} />
+        ))}
+      </ScrollView>
+
+      <Box
+        position="absolute"
+        px="xl"
+        width={"100%"}
+        bottom={'15%'}
+        gap="s"
+      >
         <Button
+          onPress={() => router.replace("/(auth)/signup")}
+          buttonStyles={{ width: "100%" }}
+          textColor="white"
+        >
+          Get Started
+        </Button>
+
+        <Button
+          onPress={() => router.replace('/(auth)/signin')}
+          buttonStyles={{ width: "100%" }}
+          textColor={colors.primary}
           color="white"
-          textColor="#6135FE"
-          onPress={() => {
-            router.push("/signup");
-          }}
         >
           Sign In
         </Button>
-      </View>
-    </View>
+        
+      </Box>
+    </SafeAreaView>
   );
 }
 
@@ -77,3 +106,43 @@ const styles = StyleSheet.create({
 });
 
 export default Onboarding;
+
+type OnboardinPageProps = {
+  title: string;
+  subtitle: string;
+  isLast: boolean;
+  image: React.ReactNode;
+  color?: string;
+};
+
+function OnboardingPage(props: OnboardinPageProps) {
+  const { width: DEVICE_WIDTH } = useWindowDimensions();
+  return (
+    <Box width={DEVICE_WIDTH} p="l" backgroundColor="mainBackground">
+      <Box py="m" mb="m" alignSelf="center">
+        {props.image}
+      </Box>
+      <Box py="xs">
+        <Text
+          textAlign="center"
+          style={{ width: "90%", alignSelf: "center" }}
+          fontSize={34}
+          lineHeight={48}
+          mb="s"
+          variant="h1"
+        >
+          {props.title}
+        </Text>
+        <Text
+          variant="title"
+          textAlign="center"
+          color="mainText"
+          lineHeight={28}
+          style={{ width: "95%", alignSelf: "center" }}
+        >
+          {props.subtitle}
+        </Text>
+      </Box>
+    </Box>
+  );
+}
