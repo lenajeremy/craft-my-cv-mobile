@@ -27,6 +27,7 @@ export default function TextInput(props: TextInputProps) {
       StyleSheet.create({
         textInput: {
           ...textVariants.title,
+          lineHeight: 21,
           flex: 1,
           paddingVertical: props.variant === "outlined" ? spacing.s : 12,
         },
@@ -46,16 +47,12 @@ export default function TextInput(props: TextInputProps) {
           {props.label}
         </Text>
       )}
-      {/* borderWidth: props.variant === "outlined" ? 1 : 0,
-          borderColor: colors.border,
-          borderRadius: 8, */}
       <Box
         borderRadius={8}
         marginTop="s"
         flexDirection="row"
         gap="s"
-        py={props.variant === "outlined" ? "s" : "none"}
-        style = {{ paddingHorizontal: props.variant === 'outlined' ? 10 : 0}}
+        style={{ padding: props.variant === "outlined" ? 10 : 0 }}
         borderColor="border"
         borderWidth={props.variant === "outlined" ? 1 : 0}
         alignItems="center"

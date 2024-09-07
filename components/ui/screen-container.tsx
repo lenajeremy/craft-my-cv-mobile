@@ -43,7 +43,10 @@ export default function ScreenContainer(props: ScreenContainerProps) {
 
         {/* should screen content scroll? */}
         {props.scrollable ? (
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1 }}
+            showsVerticalScrollIndicator={false}
+          >
             <Box px="default" flex={1} {...props.contentContainerProps}>
               {props.children}
             </Box>

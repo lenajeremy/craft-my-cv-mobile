@@ -37,7 +37,7 @@ const theme = createTheme({
     textVariants: {
         h1: {
             fontWeight: 'bold',
-            fontSize: 24,
+            fontSize: 28,
             color: "headingText",
             lineHeight: 30,
         },
@@ -60,7 +60,7 @@ const theme = createTheme({
             lineHeight: 26
         },
         body: {
-            fontSize: 16,
+            fontSize: 17,
             lineHeight: 20,
             color: "mainText"
         },
@@ -70,7 +70,7 @@ const theme = createTheme({
             color: "mutedText"
         },
         defaults: {
-            fontSize: 16,
+            fontSize: 17,
             lineHeight: 20,
             color: "mainText"
         },

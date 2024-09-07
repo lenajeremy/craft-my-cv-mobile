@@ -3,6 +3,7 @@ import {
   Pressable,
   PressableProps,
   StyleSheet,
+  TextStyle,
 } from "react-native";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
@@ -18,7 +19,7 @@ export type ButtonProps = {
   onPress: () => void;
   children?: React.ReactNode;
   accessibilityLabel?: string;
-  textColor: string;
+  textStyle?: TextStyle;
   icon?: React.ReactNode;
 };
 
@@ -72,7 +73,7 @@ const Button = (props: ButtonProps) => {
         {props.icon && props.icon}
         <Text
           fontWeight="700"
-          style={[styles.text, { color: props.textColor || "white" }]}
+          style={[styles.text, { color: "white" }, props.textStyle]}
         >
           {props.children || "Press Me"}
         </Text>
