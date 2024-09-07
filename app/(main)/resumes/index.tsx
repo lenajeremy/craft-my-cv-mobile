@@ -85,7 +85,6 @@ export default function Resumes() {
       </ScrollView>
 
       <Button
-        textColor="white"
         disabled={selectedTemplate === null}
         onPress={onSelectTemplate}
         buttonStyles={{ width: "100%" }}

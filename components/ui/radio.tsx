@@ -1,7 +1,7 @@
 import Box from "./box";
 import { Pressable } from "react-native";
 
-export default function Checkbox({
+export default function RadioButton({
   checked,
   onPress,
   value,

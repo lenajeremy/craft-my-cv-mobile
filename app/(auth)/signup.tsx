@@ -1,4 +1,6 @@
+import * as React from "react";
 import Text from "@/components/ui/text";
+import Checkbox from "expo-checkbox";
 import ScreenContainer from "@/components/ui/screen-container";
 import AuthScreenHeader from "@/components/auth/screen-header";
 import Box from "@/components/ui/box";
@@ -13,15 +15,26 @@ import LockSVG from "@/assets/icons/lock";
 import { Pressable } from "react-native";
 import EyeSVG from "@/assets/icons/eye";
 import { Link } from "expo-router";
+import UserProfileSVG from "@/assets/icons/user";
 
 export default function Signup() {
-  const { colors, spacing } = useTheme<Theme>()
+  const { colors, spacing } = useTheme<Theme>();
+  const [checked, setChecked] = React.useState(false);
 
   return (
     <ScreenContainer ScreenHeaderComponent={<AuthScreenHeader />} scrollable>
-      <Box my="xl" px="s">
+      <Box my="m" px="s">
         <Text variant="h1">Create an account</Text>
         <Box gap="m" mt="default">
+          <TextInput
+            showLabel
+            label="Full name"
+            variant="outlined"
+            PrefixElement={<UserProfileSVG />}
+            style={{ lineHeight: 20 }}
+            placeholder="John Doe"
+          />
+
           <TextInput
             showLabel
             label="Email Address"
@@ -33,9 +46,23 @@ export default function Signup() {
           <TextInput
             secureTextEntry
             showLabel
-            label="Email Address"
+            label="Password"
             variant="outlined"
-            placeholder="Enter your password"
+            placeholder="Create a password"
+            PrefixElement={<LockSVG />}
+            SuffixElement={
+              <Pressable style={{ padding: 4 }}>
+                <EyeSVG />
+              </Pressable>
+            }
+          />
+
+          <TextInput
+            secureTextEntry
+            showLabel
+            label="Confirm password"
+            variant="outlined"
+            placeholder="Confirm your password"
             PrefixElement={<LockSVG />}
             SuffixElement={
               <Pressable style={{ padding: 4 }}>
@@ -44,25 +71,43 @@ export default function Signup() {
             }
           />
         </Box>
-        <Link
-          href="/reset-password"
-          style={{ marginVertical: 12, textAlign: "right" }}
-        >
-          <Text color="primary">Forgot Password?</Text>
-        </Link>
+
+        <Box flexDirection="row" gap="s" my="m">
+          <Checkbox
+            value={checked}
+            onValueChange={setChecked}
+            color={!checked ? colors.mainText : colors.primary}
+          />
+          <Text style={{ flex: 1, lineHeight: 24 }}>
+            I read and agreed to the{" "}
+            <Link
+              href="/reset-password"
+              style={{ marginVertical: 12, textAlign: "right" }}
+            >
+              <Text color="primary">Terms and conditions</Text>
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/reset-password"
+              style={{ marginVertical: 12, textAlign: "right" }}
+            >
+              <Text color="primary">Privacy Policy</Text>
+            </Link>
+          </Text>
+        </Box>
 
         <Button
           onPress={() => {}}
-          disabled
+          disabled = {!checked}
           buttonStyles={{ marginVertical: 10 }}
         >
-          Sign In
+          Sign Up
         </Button>
-        <Box py="l" gap="l" alignItems="center">
+        <Box py="m" gap="m" alignItems="center">
           <Text>
-            Don't have an account?{" "}
-            <Link href="/signup" style={{ color: colors.primary }}>
-              Sign Up
+            Already have an account?{" "}
+            <Link href="/signin" style={{ color: colors.primary }}>
+              Sign In
             </Link>
           </Text>
 

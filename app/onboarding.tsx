@@ -72,7 +72,6 @@ function Onboarding() {
         <Button
           onPress={() => router.replace("/(auth)/signup")}
           buttonStyles={{ width: "100%" }}
-          textColor="white"
         >
           Get Started
         </Button>
@@ -80,7 +79,9 @@ function Onboarding() {
         <Button
           onPress={() => router.replace('/(auth)/signin')}
           buttonStyles={{ width: "100%" }}
-          textColor={colors.primary}
+          textStyle={{
+            color: colors.primary
+          }}
           color="white"
         >
           Sign In
@@ -90,20 +91,6 @@ function Onboarding() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 28,
-    fontWeight: "bold",
-    width: 320,
-  },
-  subText: {
-    fontSize: 16,
-    fontWeight: 400,
-    marginTop: 20,
-    width: 320,
-  },
-});
 
 export default Onboarding;
 

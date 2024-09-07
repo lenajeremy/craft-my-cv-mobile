@@ -1,5 +1,5 @@
 import Box from "./ui/box";
-import Checkbox from "./ui/checkbox";
+import Checkbox from "./ui/radio";
 import Text from "./ui/text";
 import { Image, Pressable } from "react-native";
 
