@@ -1,7 +1,5 @@
 import Box from "@/components/ui/box";
 import ScreenContainer from "@/components/ui/screen-container";
-import { Theme } from "@/theme";
-import { useTheme } from "@shopify/restyle";
 import Text from "@/components/ui/text";
 import { router } from "expo-router";
 import Button from "@/components/ui/button";

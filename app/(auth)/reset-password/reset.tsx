@@ -1,6 +1,5 @@
 import EyeSVG from "@/assets/icons/eye";
 import LockSVG from "@/assets/icons/lock";
-import LoginEnvelopeSVG from "@/assets/icons/login-envelope";
 import Box from "@/components/ui/box";
 import Button from "@/components/ui/button";
 import ScreenContainer from "@/components/ui/screen-container";

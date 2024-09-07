@@ -92,7 +92,6 @@ export default function MailSVG() {
       />
       <Mask
         id="mask0_237_5359"
-        style={{ maskType: 'alpha'}}
         maskUnits="userSpaceOnUse"
         x="72"
         y="3"

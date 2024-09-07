@@ -18,7 +18,7 @@ import { Link } from "expo-router";
 import UserProfileSVG from "@/assets/icons/user";
 
 export default function Signup() {
-  const { colors, spacing } = useTheme<Theme>();
+  const { colors } = useTheme<Theme>();
   const [checked, setChecked] = React.useState(false);
 
   return (

@@ -37,7 +37,6 @@ export default function EditEducation() {
         <Button
           disabled
           onPress={() => {}}
-          textColor="white"
           buttonStyles={{ marginVertical: 8 }}
         >
           Save

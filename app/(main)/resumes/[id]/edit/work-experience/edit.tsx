@@ -37,7 +37,6 @@ export default function EditWorkExperience() {
         <Button
           disabled
           onPress={() => {}}
-          textColor="white"
           buttonStyles={{ marginVertical: 8 }}
         >
           Save

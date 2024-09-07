@@ -23,7 +23,7 @@ export default function Education() {
         <Box alignItems="center" mt="l">
           <Button
             color="white"
-            textColor={colors.primary}
+            textStyle={{color: colors.primary}}
             onPress={() => router.push("./edit")}
             icon={<PlusSVG />}
           >

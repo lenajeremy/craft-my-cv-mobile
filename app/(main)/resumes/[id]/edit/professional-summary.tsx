@@ -22,7 +22,6 @@ export default function ProfessionalSummary() {
       ScreenFooterComponent={
         <Button
           onPress={() => router.push(`/resumes/${id}/edit`)}
-          textColor="white"
           buttonStyles={{ marginVertical: 8 }}
         >
           Save
@@ -45,7 +44,7 @@ export default function ProfessionalSummary() {
           <Button
             onPress={() => setSummary(aiSummary)}
             icon={<AISVG />}
-            textColor={colors.primary}
+            textStyle={{ color: colors.primary }}
             color="white"
           >
             Generate with AI

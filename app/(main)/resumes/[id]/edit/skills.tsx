@@ -62,10 +62,7 @@ export default function Skills() {
         </Box>
 
         <Box alignItems="center">
-          <Button
-            textColor="white"
-            onPress={() => router.push("./professional-summary")}
-          >
+          <Button onPress={() => router.push("./professional-summary")}>
             Save
           </Button>
         </Box>

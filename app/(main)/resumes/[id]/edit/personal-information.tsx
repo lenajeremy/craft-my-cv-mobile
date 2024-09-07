@@ -26,7 +26,6 @@ export default function PersonalInformation() {
         <Button
           disabled
           onPress={() => {}}
-          textColor="white"
           buttonStyles={{ alignSelf: "center", marginVertical: 8 }}
         >
           Next

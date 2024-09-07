@@ -23,7 +23,7 @@ export default function WorkExperience() {
         <Box alignItems="center" mt="l">
           <Button
             color="white"
-            textColor={colors.primary}
+            textStyle={{color: colors.primary}}
             onPress={() => router.push("./edit")}
             icon={<PlusSVG />}
             buttonStyles={{

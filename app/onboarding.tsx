@@ -1,10 +1,5 @@
 import Button from "@/components/ui/button";
-import {
-  StyleSheet,
-  ScrollView,
-  useWindowDimensions,
-  SafeAreaView,
-} from "react-native";
+import { ScrollView, useWindowDimensions, SafeAreaView } from "react-native";
 import Text from "@/components/ui/text";
 import Box from "@/components/ui/box";
 import OnboardingSvg1 from "@/assets/icons/onboarding-svg-1";
@@ -62,13 +57,7 @@ function Onboarding() {
         ))}
       </ScrollView>
 
-      <Box
-        position="absolute"
-        px="xl"
-        width={"100%"}
-        bottom={'15%'}
-        gap="s"
-      >
+      <Box position="absolute" px="xl" width={"100%"} bottom={"15%"} gap="s">
         <Button
           onPress={() => router.replace("/(auth)/signup")}
           buttonStyles={{ width: "100%" }}
@@ -77,16 +66,15 @@ function Onboarding() {
         </Button>
 
         <Button
-          onPress={() => router.replace('/(auth)/signin')}
+          onPress={() => router.replace("/(auth)/signin")}
           buttonStyles={{ width: "100%" }}
           textStyle={{
-            color: colors.primary
+            color: colors.primary,
           }}
           color="white"
         >
           Sign In
         </Button>
-        
       </Box>
     </SafeAreaView>
   );
