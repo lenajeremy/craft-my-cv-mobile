@@ -81,14 +81,14 @@ export default function Signup() {
           <Text style={{ flex: 1, lineHeight: 24 }}>
             I read and agreed to the{" "}
             <Link
-              href="/reset-password"
+              href="/reset-password/request"
               style={{ marginVertical: 12, textAlign: "right" }}
             >
               <Text color="primary">Terms and conditions</Text>
             </Link>{" "}
             and{" "}
             <Link
-              href="/reset-password"
+              href="/reset-password/request"
               style={{ marginVertical: 12, textAlign: "right" }}
             >
               <Text color="primary">Privacy Policy</Text>

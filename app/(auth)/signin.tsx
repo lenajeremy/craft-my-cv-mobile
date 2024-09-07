@@ -45,7 +45,7 @@ export default function SignIn() {
           />
         </Box>
         <Link
-          href="/reset-password"
+          href="/reset-password/request"
           style={{ marginVertical: 12, textAlign: "right" }}
         >
           <Text color="primary">Forgot Password?</Text>
