@@ -3,7 +3,7 @@ import { Redirect } from "expo-router";
 
 export default function App() {
   const isLoggedIn = true;
-  const isFirstTime = true;
+  const isFirstTime = false;
 
   if (isFirstTime) {
     return <Redirect href="/onboarding" />;

@@ -35,7 +35,7 @@ export default function EditWorkExperience() {
       headerTitle="Work Experience"
       ScreenFooterComponent={
         <Button
-          disabled
+          variant="contained"
           onPress={() => {}}
           buttonStyles={{ marginVertical: 8 }}
         >

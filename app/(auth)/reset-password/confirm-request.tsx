@@ -28,6 +28,7 @@ function ConfirmRequestPasswordReset() {
         </Box>
         <Box width={"100%"} alignItems="center" mt="m" g="default">
           <Button
+            variant="contained"
             buttonStyles={{ width: "85%" }}
             textStyle={{ fontWeight: "normal" }}
             onPress={openInbox}
@@ -36,13 +37,17 @@ function ConfirmRequestPasswordReset() {
           </Button>
 
           <Button
-            buttonStyles={{ borderColor: colors.border, width: "60%", borderWidth: 1.5 }}
+            buttonStyles={{
+              borderColor: colors.border,
+              width: "60%",
+              borderWidth: 1.5,
+            }}
             textStyle={{
               fontWeight: "normal",
               color: colors.mainText,
             }}
+            variant="outlined"
             onPress={() => router.push("/reset-password/reset")}
-            color={colors.mainBackground}
           >
             Resend Link
           </Button>

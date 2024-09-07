@@ -3,14 +3,10 @@ import Box from "@/components/ui/box";
 import Button from "@/components/ui/button";
 import CardLink from "@/components/ui/card-link";
 import ScreenContainer from "@/components/ui/screen-container";
-import { Theme } from "@/theme";
-import { useTheme } from "@shopify/restyle";
 import { useRouter } from "expo-router";
 
 export default function WorkExperience() {
   const companies = ["Microsoft", "Goldman Sachs", "Black Rock"];
-
-  const { colors } = useTheme<Theme>();
   const router = useRouter();
 
   return (
@@ -22,13 +18,9 @@ export default function WorkExperience() {
 
         <Box alignItems="center" mt="l">
           <Button
-            color="white"
-            textStyle={{color: colors.primary}}
+            variant="outlined"
             onPress={() => router.push("./edit")}
             icon={<PlusSVG />}
-            buttonStyles={{
-              width: "100%",
-            }}
           >
             Add Another
           </Button>

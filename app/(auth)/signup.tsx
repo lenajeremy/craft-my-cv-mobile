@@ -100,6 +100,7 @@ export default function Signup() {
           onPress={() => {}}
           disabled = {!checked}
           buttonStyles={{ marginVertical: 10 }}
+          variant="contained"
         >
           Sign Up
         </Button>
@@ -122,7 +123,7 @@ export default function Signup() {
               buttonStyles={{
                 borderColor: colors.border,
               }}
-              color={colors.mainBackground}
+              variant="outlined"
               onPress={() => {}}
               icon={<LinkedInSVG />}
             >
@@ -136,7 +137,7 @@ export default function Signup() {
               buttonStyles={{
                 borderColor: colors.border,
               }}
-              color={colors.mainBackground}
+              variant="outlined"
               onPress={() => {}}
               icon={<GoogleSVG />}
             >

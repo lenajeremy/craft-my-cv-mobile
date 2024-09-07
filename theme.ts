@@ -84,7 +84,7 @@ const darkTheme = {
         mainText: palette.muted,
         headingText: palette.white,
         mutedText: palette.muted,
-        border: palette.muted,
+        border: palette.neutral,
         primary: palette.purple,
         primary2: palette.purple2,
         primaryFaded: palette.purple2,

@@ -40,7 +40,10 @@ function ResetPassword() {
           placeholder="Confirm your new password"
         />
       </Box>
-      <Button onPress={() => router.push('/(auth)/reset-password/confirm-reset')}>
+      <Button
+        variant="contained"
+        onPress={() => router.push("/(auth)/reset-password/confirm-reset")}
+      >
         Continue
       </Button>
     </ScreenContainer>

@@ -24,7 +24,7 @@ export default function PersonalInformation() {
       headerTitle="Personal Information"
       ScreenFooterComponent={
         <Button
-          disabled
+          variant="contained"
           onPress={() => {}}
           buttonStyles={{ alignSelf: "center", marginVertical: 8 }}
         >

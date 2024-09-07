@@ -59,6 +59,7 @@ function Onboarding() {
 
       <Box position="absolute" px="xl" width={"100%"} bottom={"15%"} gap="s">
         <Button
+        variant="contained"
           onPress={() => router.replace("/(auth)/signup")}
           buttonStyles={{ width: "100%" }}
         >
@@ -68,11 +69,7 @@ function Onboarding() {
         <Button
           onPress={() => router.replace("/(auth)/signin")}
           buttonStyles={{ width: "100%" }}
-          textStyle={{
-            color: colors.primary,
-          }}
-          color="white"
-        >
+          variant='outlined'>
           Sign In
         </Button>
       </Box>

@@ -88,6 +88,7 @@ export default function Resumes() {
         disabled={selectedTemplate === null}
         onPress={onSelectTemplate}
         buttonStyles={{ width: "100%" }}
+        variant="contained"
       >
         Craft with this template
       </Button>

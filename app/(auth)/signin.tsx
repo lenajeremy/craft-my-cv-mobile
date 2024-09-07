@@ -52,8 +52,8 @@ export default function SignIn() {
         </Link>
 
         <Button
+          variant="contained"
           onPress={() => {}}
-          disabled
           buttonStyles={{ marginVertical: 10 }}
         >
           Sign In
@@ -77,7 +77,7 @@ export default function SignIn() {
               buttonStyles={{
                 borderColor: colors.border,
               }}
-              color={colors.mainBackground}
+              variant="outlined"
               onPress={() => {}}
               icon={<LinkedInSVG />}
             >
@@ -91,7 +91,7 @@ export default function SignIn() {
               buttonStyles={{
                 borderColor: colors.border,
               }}
-              color={colors.mainBackground}
+              variant="outlined"
               onPress={() => {}}
               icon={<GoogleSVG />}
             >

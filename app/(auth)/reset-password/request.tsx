@@ -28,7 +28,10 @@ function RequestPasswordReset() {
         placeholder="johndoe@crafymycv.com"
         containerProps={{ my: "l" }}
       />
-      <Button onPress={() => router.push('/(auth)/reset-password/confirm-request')}>
+      <Button
+        variant="contained"
+        onPress={() => router.push("/(auth)/reset-password/confirm-request")}
+      >
         Continue
       </Button>
     </ScreenContainer>

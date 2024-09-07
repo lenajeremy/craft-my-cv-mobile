@@ -3,13 +3,10 @@ import Box from "@/components/ui/box";
 import Button from "@/components/ui/button";
 import ScreenContainer from "@/components/ui/screen-container";
 import TextInput from "@/components/ui/textinput";
-import { Theme } from "@/theme";
-import { useTheme } from "@shopify/restyle";
 import { router, useLocalSearchParams } from "expo-router";
 import React from "react";
 
 export default function ProfessionalSummary() {
-  const { colors } = useTheme<Theme>();
   const [summary, setSummary] = React.useState("");
   const { id } = useLocalSearchParams();
   const aiSummary =
@@ -21,6 +18,7 @@ export default function ProfessionalSummary() {
       showHeaderTitle
       ScreenFooterComponent={
         <Button
+          variant="contained"
           onPress={() => router.push(`/resumes/${id}/edit`)}
           buttonStyles={{ marginVertical: 8 }}
         >
@@ -44,8 +42,7 @@ export default function ProfessionalSummary() {
           <Button
             onPress={() => setSummary(aiSummary)}
             icon={<AISVG />}
-            textStyle={{ color: colors.primary }}
-            color="white"
+            variant="outlined"
           >
             Generate with AI
           </Button>

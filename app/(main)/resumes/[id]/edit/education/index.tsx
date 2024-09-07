@@ -3,14 +3,11 @@ import Box from "@/components/ui/box";
 import Button from "@/components/ui/button";
 import CardLink from "@/components/ui/card-link";
 import ScreenContainer from "@/components/ui/screen-container";
-import { Theme } from "@/theme";
-import { useTheme } from "@shopify/restyle";
 import { useRouter } from "expo-router";
 
 export default function Education() {
   const schools = ["Princeton University", "University of Lagos"];
 
-  const { colors } = useTheme<Theme>();
   const router = useRouter();
 
   return (
@@ -22,8 +19,7 @@ export default function Education() {
 
         <Box alignItems="center" mt="l">
           <Button
-            color="white"
-            textStyle={{color: colors.primary}}
+            variant="outlined"
             onPress={() => router.push("./edit")}
             icon={<PlusSVG />}
           >

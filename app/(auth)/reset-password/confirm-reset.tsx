@@ -24,6 +24,7 @@ function ConfirmPasswordReset() {
         </Box>
         <Box width={"100%"} alignItems="center" mt="m" g="default">
           <Button
+          variant="contained"
             buttonStyles={{ width: "85%" }}
             textStyle={{ fontWeight: "normal" }}
             onPress={() => router.replace('/signin')}

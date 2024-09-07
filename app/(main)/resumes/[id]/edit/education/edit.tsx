@@ -35,9 +35,9 @@ export default function EditEducation() {
       scrollable
       ScreenFooterComponent={
         <Button
-          disabled
           onPress={() => {}}
           buttonStyles={{ marginVertical: 8 }}
+          variant="contained"
         >
           Save
         </Button>

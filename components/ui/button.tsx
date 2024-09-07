@@ -4,6 +4,7 @@ import {
   PressableProps,
   StyleSheet,
   TextStyle,
+  useColorScheme,
 } from "react-native";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
@@ -14,17 +15,18 @@ import Box from "./box";
 export type ButtonProps = {
   disabled?: boolean;
   buttonStyles?: PressableProps["style"];
-  color?: string;
   marginBottom?: DimensionValue;
   onPress: () => void;
   children?: React.ReactNode;
   accessibilityLabel?: string;
   textStyle?: TextStyle;
   icon?: React.ReactNode;
+  variant: "outlined" | "contained";
 };
 
 const Button = (props: ButtonProps) => {
   const { colors } = useTheme<Theme>();
+  const isDarkMode = useColorScheme() === "dark";
 
   const styles = useMemo(
     () =>
@@ -39,12 +41,10 @@ const Button = (props: ButtonProps) => {
           justifyContent: "center",
           alignContent: "center",
           borderColor: colors.primary,
-          borderWidth: 1,
+          borderWidth: 1.5,
         },
         disabled: {
-          backgroundColor: colors.primaryFaded,
-          borderColor: colors.primaryFaded,
-          // opacity: 0.8,
+          opacity: 0.3,
         },
         text: { fontSize: 18 },
       }),
@@ -56,13 +56,15 @@ const Button = (props: ButtonProps) => {
       // @ts-ignore
       style={({ pressed }) => [
         styles.container,
-        props.buttonStyles,
         {
-          backgroundColor: pressed
-            ? colors.primary + "10"
-            : props.color || colors.primary,
+          backgroundColor:
+            props.variant === "contained"
+              ? colors.primary
+              : colors.mainBackground,
+          opacity: pressed ? 0.5 : 1,
         },
         props.disabled && styles.disabled,
+        props.buttonStyles,
       ]}
       disabled={props.disabled}
       onPress={props.onPress}
@@ -72,8 +74,15 @@ const Button = (props: ButtonProps) => {
       <Box flexDirection="row" alignItems="center" gap="s">
         {props.icon && props.icon}
         <Text
-          fontWeight="700"
-          style={[styles.text, { color: "white" }, props.textStyle]}
+          fontWeight="600"
+          style={[
+            styles.text,
+            {
+              color:
+                props.variant === "contained" ? colors.white : colors.primary,
+            },
+            props.textStyle,
+          ]}
         >
           {props.children || "Press Me"}
         </Text>
