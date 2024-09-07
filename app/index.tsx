@@ -10,11 +10,10 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const isLoggedIn = true;
   const isFirstTime = false;
-  
+
   const [loaded, error] = useFonts(FONTS);
 
   React.useEffect(() => {
-    console.log(loaded, error)
     if (loaded || error) {
       SplashScreen.hideAsync();
     }

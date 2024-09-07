@@ -40,8 +40,8 @@ const theme = createTheme({
             fontWeight: 'bold',
             fontSize: 28,
             color: "headingText",
-            lineHeight: 30,
-            fontFamily: "Manrope-Bold" as Font,
+            lineHeight: 34,
+            fontFamily: "Manrope-ExtraBold" satisfies Font,
         },
         h2: {
             fontWeight: 'bold',

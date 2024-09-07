@@ -24,7 +24,7 @@ export default function CardLink(props: CardLinkProps) {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <Text variant="h3" fontWeight="300">
+                <Text variant="h3" font='Manrope-Regular'>
                   {props.title}
                 </Text>
                 <ArrowRightSVG />
