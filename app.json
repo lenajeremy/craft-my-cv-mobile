@@ -30,7 +30,8 @@
     },
     "plugins": [
       "expo-router",
-      "react-native-email-link"
+      "react-native-email-link",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true

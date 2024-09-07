@@ -1,4 +1,5 @@
 import { createTheme } from '@shopify/restyle';
+import { Font } from './constants';
 
 const palette = {
     purple: '#6135FE',
@@ -40,29 +41,34 @@ const theme = createTheme({
             fontSize: 28,
             color: "headingText",
             lineHeight: 30,
+            fontFamily: "Manrope-Bold" as Font,
         },
         h2: {
             fontWeight: 'bold',
             fontSize: 22,
             color: 'headingText',
-            lineHeight: 26
+            lineHeight: 26,
+            fontFamily: "Manrope-Bold" as Font
         },
         h3: {
             fontWeight: "bold",
             fontSize: 20,
             color: "headingText",
-            lineHeight: 26
+            lineHeight: 26,
+            fontFamily: "Manrope-Bold" as Font
         },
         title: {
             fontSize: 18,
             fontWeight: 'normal',
             color: "headingText",
-            lineHeight: 26
+            lineHeight: 26,
+            fontFamily: "Manrope-Semibold" as Font
         },
         body: {
             fontSize: 17,
             lineHeight: 20,
-            color: "mainText"
+            color: "mainText",
+            fontFamily: "Manrope-Regular"
         },
         small: {
             fontSize: 13,
@@ -72,8 +78,9 @@ const theme = createTheme({
         defaults: {
             fontSize: 17,
             lineHeight: 20,
-            color: "mainText"
-        },
+            color: "mainText",
+            fontFamily: "Manrope-Regular" as Font
+        }
     },
 });
 
