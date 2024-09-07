@@ -8,7 +8,7 @@ const palette = {
     white: '#FFFFFF',
     neutral: "#4A5568",
     muted: "#7C8289",
-    lightGray: "#EFEBFF"
+    lightGray: "#CBD5E0"
 };
 
 const theme = createTheme({
@@ -25,6 +25,7 @@ const theme = createTheme({
         dark: palette.dark,
     },
     spacing: {
+        none: 0,
         line: 2,
         xs: 4,
         s: 8,

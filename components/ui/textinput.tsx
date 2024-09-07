@@ -13,6 +13,9 @@ export type TextInputProps = {
   showLabel?: boolean;
   label?: string;
   containerProps?: BoxProps;
+  variant?: "outlined" | "underline";
+  PrefixElement?: React.ReactNode;
+  SuffixElement?: React.ReactNode;
 } & NativeTextInputProps;
 
 export default function TextInput(props: TextInputProps) {
@@ -24,29 +27,64 @@ export default function TextInput(props: TextInputProps) {
       StyleSheet.create({
         textInput: {
           ...textVariants.title,
-          paddingTop: spacing.m,
-          paddingBottom: spacing.s,
+          flex: 1,
+          paddingVertical: props.variant === "outlined" ? spacing.s : 12,
         },
       }),
-    [spacing, textVariants]
+    [spacing, textVariants, props.variant]
   );
 
   return (
     <Box
       {...{
-        borderBottomWidth: 1,
-        borderBottomColor: "border",
-        padding: "s",
+        ...inputContainerPropsFromVariant(props.variant),
         ...containerProps,
       }}
     >
-      {props.showLabel && <Text color="mainText" variant="small">{props.label}</Text>}
-      <NativeTextInput
-        {...inputProps}
-        // @ts-ignore
-        style={[styles.textInput, inputProps.style]}
-        placeholderTextColor={colors.mutedText + "50"}
-      />
+      {props.showLabel && (
+        <Text color="mainText" variant="small">
+          {props.label}
+        </Text>
+      )}
+      {/* borderWidth: props.variant === "outlined" ? 1 : 0,
+          borderColor: colors.border,
+          borderRadius: 8, */}
+      <Box
+        borderRadius={8}
+        marginTop="s"
+        flexDirection="row"
+        gap="s"
+        py={props.variant === "outlined" ? "s" : "none"}
+        style = {{ paddingHorizontal: props.variant === 'outlined' ? 10 : 0}}
+        borderColor="border"
+        borderWidth={props.variant === "outlined" ? 1 : 0}
+        alignItems="center"
+      >
+        {props.PrefixElement}
+        <NativeTextInput
+          {...inputProps}
+          // @ts-ignore
+          style={[styles.textInput, inputProps.style]}
+          placeholderTextColor={colors.mutedText + "50"}
+        />
+        {props.SuffixElement}
+      </Box>
     </Box>
   );
+}
+
+function inputContainerPropsFromVariant(
+  v: TextInputProps["variant"]
+): BoxProps {
+  if (v === "outlined") {
+    return {
+      borderWidth: 0,
+    };
+  } else {
+    return {
+      borderBottomWidth: 1,
+      borderBottomColor: "border",
+      paddingVertical: "s",
+    };
+  }
 }
