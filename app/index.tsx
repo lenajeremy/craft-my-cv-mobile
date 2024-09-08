@@ -8,8 +8,8 @@ SplashScreen.preventAutoHideAsync();
 
 
 export default function App() {
-  const isLoggedIn = true;
-  const isFirstTime = false;
+  const isLoggedIn = false;
+  const isFirstTime = true;
 
   const [loaded, error] = useFonts(FONTS);
 

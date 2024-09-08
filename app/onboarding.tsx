@@ -98,8 +98,8 @@ function OnboardingPage(props: OnboardinPageProps) {
         <Text
           textAlign="center"
           style={{ width: "90%", alignSelf: "center" }}
-          fontSize={34}
-          lineHeight={48}
+          fontSize={30}
+          lineHeight={40}
           mb="s"
           variant="h1"
         >

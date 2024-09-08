@@ -1,3 +1,4 @@
+import * as React from "react";
 import EyeSVG from "@/assets/icons/eye";
 import GoogleSVG from "@/assets/icons/google";
 import LinkedInSVG from "@/assets/icons/linkedin";
@@ -12,10 +13,27 @@ import TextInput from "@/components/ui/textinput";
 import { Theme } from "@/theme";
 import { useTheme } from "@shopify/restyle";
 import { Link } from "expo-router";
-import { Pressable } from "react-native";
+import { ActivityIndicator, Pressable } from "react-native";
+import { useLoginMutation } from "@/http/authApi";
+
 
 export default function SignIn() {
   const { colors } = useTheme<Theme>();
+  const [loginDetails, setLoginDetails] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  const handleLogin = async () => {
+    try {
+      const res = await login(loginDetails).unwrap();
+      console.log(res);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <ScreenContainer ScreenHeaderComponent={<AuthScreenHeader />}>
@@ -23,6 +41,10 @@ export default function SignIn() {
         <Text variant="h1">Sign In</Text>
         <Box gap="m" mt="default">
           <TextInput
+            value={loginDetails.email}
+            onChangeText={(email) =>
+              setLoginDetails({ ...loginDetails, email })
+            }
             showLabel
             label="Email Address"
             variant="outlined"
@@ -31,6 +53,10 @@ export default function SignIn() {
             placeholder="johndoe@example.com"
           />
           <TextInput
+            value={loginDetails.password}
+            onChangeText={(p) =>
+              setLoginDetails({ ...loginDetails, password: p })
+            }
             secureTextEntry
             showLabel
             label="Email Address"
@@ -53,11 +79,12 @@ export default function SignIn() {
 
         <Button
           variant="contained"
-          onPress={() => {}}
+          onPress={handleLogin}
           buttonStyles={{ marginVertical: 10 }}
         >
           Sign In
         </Button>
+        {isLoading && <ActivityIndicator />}
         <Box py="l" gap="l" alignItems="center">
           <Text>
             Don't have an account?{" "}

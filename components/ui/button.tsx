@@ -41,12 +41,12 @@ const Button = (props: ButtonProps) => {
           justifyContent: "center",
           alignContent: "center",
           borderColor: colors.primary,
-          borderWidth: 1.5,
+          borderWidth: 1,
         },
         disabled: {
           opacity: 0.3,
         },
-        text: { fontSize: 18 },
+        text: { fontSize: 16, fontWeight: '700' },
       }),
     [colors]
   );
