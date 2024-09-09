@@ -3,13 +3,17 @@ import { Redirect } from "expo-router";
 import { SplashScreen } from "expo-router";
 import { useFonts } from "expo-font";
 import { FONTS } from "@/constants";
+import useLocalStore from "@/hooks/useLocalStore";
 
 SplashScreen.preventAutoHideAsync();
 
 
 export default function App() {
-  const isLoggedIn = false;
-  const isFirstTime = true;
+  const [token] = useLocalStore<string>("token")
+  const [hasSeenOnboarding] = useLocalStore<boolean>("hasSeenOnboarding")
+
+  const isLoggedIn = token ? true : false;
+  const isFirstTime = hasSeenOnboarding ? false : true;
 
   const [loaded, error] = useFonts(FONTS);
 

@@ -8,8 +8,11 @@ import OnboardingSvg3 from "@/assets/icons/onboarding-svg-3";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
 import { router } from "expo-router";
+import useLocalStore from "@/hooks/useLocalStore";
 
 function Onboarding() {
+  const [, setHasSeenOnboarding] = useLocalStore<boolean>("hasSeenOnboarding")
+
   const pages: OnboardinPageProps[] = [
     {
       title: "Create Professional Resumes in Minutes",
@@ -60,14 +63,20 @@ function Onboarding() {
       <Box position="absolute" px="xl" width={"100%"} bottom={"15%"} gap="s">
         <Button
         variant="contained"
-          onPress={() => router.replace("/(auth)/signup")}
+          onPress={() => {
+            setHasSeenOnboarding(true)
+            router.replace("/(auth)/signup")
+          }}
           buttonStyles={{ width: "100%" }}
         >
           Get Started
         </Button>
 
         <Button
-          onPress={() => router.replace("/(auth)/signin")}
+          onPress={() => {
+            setHasSeenOnboarding(true)
+            router.replace("/(auth)/signin")
+          }}
           buttonStyles={{ width: "100%" }}
           variant='outlined'>
           Sign In

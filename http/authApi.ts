@@ -1,5 +1,6 @@
 import { BASE_URL } from "@/constants"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { ApiResponse } from "./types"
 
 
 const authApi = createApi({
@@ -7,12 +8,19 @@ const authApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL + '/auth' }),
     endpoints(build) {
         return {
-            login: build.mutation<string, {
+            login: build.mutation<ApiResponse<{
+                token: string;
+                user_id: string;
+                name: string;
+                email: string;
+                plan: string;
+                is_active: string;
+            }>, {
                 email: string,
                 password: string
             }>({
                 query: (args) => ({
-                    url: "/auth",
+                    url: "/login",
                     method: 'POST',
                     body: args
                 }),

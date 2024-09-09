@@ -12,9 +12,10 @@ import Text from "@/components/ui/text";
 import TextInput from "@/components/ui/textinput";
 import { Theme } from "@/theme";
 import { useTheme } from "@shopify/restyle";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { ActivityIndicator, Pressable } from "react-native";
 import { useLoginMutation } from "@/http/authApi";
+import useLocalStore from "@/hooks/useLocalStore";
 
 
 export default function SignIn() {
@@ -24,12 +25,20 @@ export default function SignIn() {
     password: "",
   });
 
+  const [token, updateToken] = useLocalStore<string>("token")
+
   const [login, { isLoading }] = useLoginMutation();
 
   const handleLogin = async () => {
     try {
       const res = await login(loginDetails).unwrap();
-      console.log(res);
+      updateToken(res.data.token)
+      console.log(res)
+
+      setTimeout(() => {
+        router.push("/home")
+      }, 5000)
+
     } catch (err) {
       console.error(err);
     }
@@ -39,6 +48,7 @@ export default function SignIn() {
     <ScreenContainer ScreenHeaderComponent={<AuthScreenHeader />}>
       <Box my="xl" px="s">
         <Text variant="h1">Sign In</Text>
+        <Text>Token: {token}</Text>
         <Box gap="m" mt="default">
           <TextInput
             value={loginDetails.email}

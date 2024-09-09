@@ -31,14 +31,7 @@
     "plugins": [
       "expo-router",
       "react-native-email-link",
-      "expo-font",
-     ["expo-build-properties",
-     {
-      "ios": {
-        "deploymentTarget": "13.4"
-      }
-     }
-    ]
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
