@@ -1,6 +1,6 @@
 export type ApiResponse<T> = {
     data: T,
-    succcess: boolean,
+    success: boolean,
     message: string,
 }
 
@@ -18,3 +18,37 @@ export type Template = {
     description: string;
     usage_count: number
 }
+
+export type Resume = {
+    firstName?: string
+    lastName?: string
+    address?: string
+    resumeName?: string
+    resumeDescription?: string
+    email?: string
+    phoneNumber?: string
+    role?: string
+    description?: string
+    experiences?: Experience[],
+    tools?: Tool[],
+    education?: Education[],
+    others?: {},
+    id: string
+}
+
+export type Education = {
+    school: string;
+    degree: string;
+    startDate: Date;
+    endDate: Date;
+    description: string;
+}
+
+export type Experience = {
+    company: string;
+    workDone: string;
+    startDate: Date;
+    endDate: Date;
+}
+
+export type Tool = string

@@ -15,8 +15,7 @@ import EnvelopeSVG from "@/assets/icons/envelope";
 import { LinearGradient } from "expo-linear-gradient";
 import { ResumeCoverLetterTab } from "@/components/home";
 import { useRouter } from "expo-router";
-import { useListUserResumesQuery } from "@/http/resumeApi";
-import { useAppSelector } from "@/hooks/redux";
+
 
 function LinearGradientIcon({ children }: { children: React.ReactNode }) {
   return (

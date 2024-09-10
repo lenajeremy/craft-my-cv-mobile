@@ -3,19 +3,38 @@ import Box from "@/components/ui/box";
 import Button from "@/components/ui/button";
 import ScreenContainer from "@/components/ui/screen-container";
 import TextInput from "@/components/ui/textinput";
+import { Resume } from "@/http/types";
+import { useFormContext, Controller } from "react-hook-form";
+import { useEditResumeMutation } from "@/http/resumeApi";
+import Text from "@/components/ui/text";
+import { router } from "expo-router";
 
 export default function PersonalInformation() {
-  const [formValues, setFormValues] = React.useState({
-    fullName: "",
-    jobTitle: "",
-    phoneNumber: "",
-    email: "",
-    location: "",
-  });
+  const { control, handleSubmit, formState } = useFormContext<Resume>();
+  const [editResume, { isLoading }] = useEditResumeMutation()
 
-  const onChangeText = (key: keyof typeof formValues, value: string) => {
-    setFormValues((formValues) => ({ ...formValues, [key]: value }));
-  };
+  const onSubmit = async (value: Resume) => {
+    const res = await editResume({
+      firstName: value.firstName,
+      lastName: value.lastName,
+      email: value.email,
+      phoneNumber: value.phoneNumber,
+      address: value.address,
+      role: value.role,
+      id: value.id
+    }).unwrap()
+
+    if(res.success) {
+      router.push({
+        pathname: "/resumes/[id]/edit/work-experience",
+        params: {
+          id: value.id
+        }
+      })
+    } else {
+      console.error(res)
+    }
+  }
 
   return (
     <ScreenContainer
@@ -24,8 +43,9 @@ export default function PersonalInformation() {
       headerTitle="Personal Information"
       ScreenFooterComponent={
         <Button
+        isLoading = {isLoading}
           variant="contained"
-          onPress={() => {}}
+          onPress={handleSubmit(onSubmit)}
           buttonStyles={{ alignSelf: "center", marginVertical: 8 }}
         >
           Next
@@ -33,42 +53,102 @@ export default function PersonalInformation() {
       }
     >
       <Box gap="m">
-        <TextInput
-          autoFocus
-          showLabel
-          label="Full name"
-          placeholder="John Doe"
-          onChangeText={(text) => onChangeText("fullName", text)}
+        <Box gap="m" flexDirection="row">
+          <Controller
+            control={control}
+            name="firstName"
+            render={({ field }) => (
+              <TextInput
+              containerProps={{flex: 1}}
+                autoFocus
+                showLabel
+                label="First name"
+                placeholder="John"
+                onBlur={field.onBlur}
+                onChangeText={field.onChange}
+                value={field.value}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="lastName"
+            render={({ field }) => (
+              <TextInput
+                containerProps={{flex: 1}}
+                autoFocus
+                showLabel
+                label="Last name"
+                placeholder="Doe"
+                onBlur={field.onBlur}
+                onChangeText={field.onChange}
+                value={field.value}
+              />
+            )}
+          />
+        </Box>
+
+        <Controller
+          control={control}
+          name="role"
+          render={({ field }) => (
+            <TextInput
+              showLabel
+              label="Desired Job Title"
+              placeholder="What job title are you looking for?"
+              onBlur={field.onBlur}
+              onChangeText={field.onChange}
+              value={field.value}
+            />
+          )}
         />
 
-        <TextInput
-          showLabel
-          label="Desired Job Title"
-          placeholder="What job title are you looking for?"
-          onChangeText={(text) => onChangeText("fullName", text)}
+        <Controller
+          control={control}
+          name="phoneNumber"
+          render={({ field }) => (
+            <TextInput
+              showLabel
+              label="Phone Number"
+              placeholder="+234 9066334521"
+              onBlur={field.onBlur}
+              onChangeText={field.onChange}
+              value={field.value}
+            />
+          )}
         />
 
-        <TextInput
-          showLabel
-          label="Phone Number"
-          placeholder="+234 9066334521"
-          onChangeText={(text) => onChangeText("phoneNumber", text)}
+        <Controller
+          control={control}
+          name="email"
+          render={({ field }) => (
+            <TextInput
+              showLabel
+              label="Email"
+              placeholder="johndoe@crafymycv.com"
+              onBlur={field.onBlur}
+              onChangeText={field.onChange}
+              value={field.value}
+              keyboardType="email-address"
+            />
+          )}
         />
 
-        <TextInput
-          showLabel
-          label="Email"
-          placeholder="johndoe@crafymycv.com"
-          onChangeText={(text) => onChangeText("email", text)}
-          keyboardType="email-address"
-        />
-
-        <TextInput
-          showLabel
-          label="Location"
-          placeholder="Lagos, NG"
-          onChangeText={(text) => onChangeText("location", text)}
-          keyboardType="email-address"
+        <Controller
+          control={control}
+          name="address"
+          render={({ field }) => (
+            <TextInput
+              showLabel
+              label="Location"
+              placeholder="Lagos, NG"
+              onBlur={field.onBlur}
+              onChangeText={field.onChange}
+              value={field.value}
+              keyboardType="email-address"
+            />
+          )}
         />
       </Box>
     </ScreenContainer>

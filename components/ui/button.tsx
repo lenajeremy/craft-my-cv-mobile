@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   DimensionValue,
   Pressable,
   PressableProps,
@@ -22,11 +23,11 @@ export type ButtonProps = {
   textStyle?: TextStyle;
   icon?: React.ReactNode;
   variant: "outlined" | "contained";
+  isLoading?: boolean;
 };
 
 const Button = (props: ButtonProps) => {
   const { colors } = useTheme<Theme>();
-  const isDarkMode = useColorScheme() === "dark";
 
   const styles = useMemo(
     () =>
@@ -63,16 +64,17 @@ const Button = (props: ButtonProps) => {
               : colors.mainBackground,
           opacity: pressed ? 0.5 : 1,
         },
-        props.disabled && styles.disabled,
+        (props.disabled || props.isLoading) && styles.disabled,
         props.buttonStyles,
       ]}
-      disabled={props.disabled}
+      disabled={props.disabled || props.isLoading}
       onPress={props.onPress}
       accessible
       accessibilityLabel={props.accessibilityLabel || "A Button"}
     >
       <Box flexDirection="row" alignItems="center" gap="s">
         {props.icon && props.icon}
+        {props.isLoading && <ActivityIndicator size="small" color={colors.white} />}
         <Text
           fontWeight="600"
           style={[

@@ -27,9 +27,10 @@ export default function SignIn() {
   });
   const dispatch = useAppDispatch();
 
-  const [token, updateToken] = useLocalStore<string>(
+  const [,updateToken] = useLocalStore<string>(
     LOCAL_STORE_KEYS.JWT_TOKEN
   );
+  
   const [, updateUserId] = useLocalStore<string>(
     LOCAL_STORE_KEYS.USER_ID
   );
@@ -61,7 +62,6 @@ export default function SignIn() {
     <ScreenContainer ScreenHeaderComponent={<AuthScreenHeader />}>
       <Box my="xl" px="s">
         <Text variant="h1">Sign In</Text>
-        <Text>Token: {token}</Text>
         <Box gap="m" mt="default">
           <TextInput
             value={loginDetails.email}

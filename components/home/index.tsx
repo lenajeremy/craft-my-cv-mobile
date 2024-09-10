@@ -13,7 +13,6 @@ import TemplateSVG from "@/assets/icons/template";
 import TrashSVG from "@/assets/icons/trash";
 import { router } from "expo-router";
 
-
 export function ResumeCoverLetterTab() {
   const [selectedTab, setSelectedTab] = useState<"resume" | "cover-letter">(
     "resume"
@@ -130,13 +129,9 @@ function Resume(props: {
       justifyContent="space-between"
       alignItems="center"
     >
-      <Pressable style={{ flex: 1 }} onPress={() => router.push({
-        pathname: '/resumes/[id]/edit',
-          params: {
-            id: props.id,
-            name: props.name,
-          },
-        })}
+      <Pressable
+        style={{ flex: 1 }}
+        onPress={() => router.push(`/resumes/${props.id}/edit`)}
       >
         <Box flexDirection="row" gap="s" alignItems="center">
           <TemplateSVG />

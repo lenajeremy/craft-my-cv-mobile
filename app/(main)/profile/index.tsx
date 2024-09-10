@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import useLocalStore, { LOCAL_STORE_KEYS } from "@/hooks/useLocalStore";
 import Button from "@/components/ui/button";
 import { updateUser } from "@/store/userSlice";
-import { useRouter, useNavigation } from "expo-router";
+import { useNavigation } from "expo-router";
 
 export default function ProfileScreen() {
   const user = useAppSelector((state) => state.user);

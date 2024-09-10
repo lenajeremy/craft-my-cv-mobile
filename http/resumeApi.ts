@@ -1,7 +1,7 @@
 import { BASE_URL } from "@/constants";
 import { RootState } from "@/store";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ApiResponse } from "./types";
+import { ApiResponse, Resume } from "./types";
 
 
 const resumeApi = createApi({
@@ -47,16 +47,50 @@ const resumeApi = createApi({
                     updatedAt: d.updated_at
                 }))
             }),
-            providesTags: ['RESUME']
+            providesTags: ['RESUME_LIST']
         }),
-        editResume: build.mutation<ApiResponse<void>, {
-            resumeId: string,
-        }>({
-            query({ resumeId, ...restArgs }) {
+        getResumeByID: build.query<ApiResponse<Resume>, string>({
+            query: resumeId => ({
+                url: `${resumeId}`,
+            }),
+            transformResponse: (res: any) => ({
+                ...res,
+                data: {
+                    firstName: res.data.first_name,
+                    lastName: res.data.last_name,
+                    address: res.data.address,
+                    resumeName: res.data.name,
+                    resumeDescription: res.data.description,
+                    email: res.data.email,
+                    phoneNumber: res.data.phone_number,
+                    role: res.data.role,
+                    description: res.data.description,
+                    experiences: res.data.experiences || [],
+                    tools: res.data.tools || [],
+                    education: res.data.education || [],
+                    others: res.data.other || {},
+                    id: res.data.id,
+                }
+            })
+        }),
+        editResume: build.mutation<ApiResponse<void>, Resume>({
+            query({ id, ...rest }) {
                 return {
-                    url: `${resumeId}/edit`,
+                    url: `${id}/edit`,
                     method: "PATCH",
-                    body: restArgs,
+                    body: {
+                        address: rest.address,
+                        email: rest.email,
+                        phone_number: rest.phoneNumber,
+                        name: rest.resumeName,
+                        description: rest.resumeDescription,
+                        role: rest.role,
+                        first_name: rest.firstName,
+                        last_name: rest.lastName,
+                        experiences: rest.experiences,
+                        tools: rest.tools,
+                        education: rest.education,
+                    },
                 }
             },
         }),
@@ -64,8 +98,9 @@ const resumeApi = createApi({
             query: (args) => ({
                 url: `/${args.resumeId}/delete`,
                 method: "DELETE"
-            })
-        })
+            }),
+            invalidatesTags: ['RESUME_LIST']
+        }),
     })
 })
 
@@ -76,5 +111,7 @@ export const {
     useListUserResumesQuery,
     useLazyListUserResumesQuery,
     useEditResumeMutation,
-    useDeleteResumeMutation
+    useDeleteResumeMutation,
+    useGetResumeByIDQuery,
+    useLazyGetResumeByIDQuery
 } = resumeApi

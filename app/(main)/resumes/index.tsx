@@ -6,9 +6,9 @@ import ResumeTemplatePreview from "@/components/resume-template-preview";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
 import Button from "@/components/ui/button";
-import { Href, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { useListAllTemplatesQuery } from "@/http/templatesApi";
-import { useCreateNewResumeMutation, useListUserResumesQuery } from "@/http/resumeApi";
+import { useCreateNewResumeMutation } from "@/http/resumeApi";
 import { useAppSelector } from "@/hooks/redux";
 
 export default function Resumes() {
@@ -38,13 +38,9 @@ export default function Resumes() {
       }).unwrap();
 
       router.replace({
-        pathname: "/resumes/[id]/edit",
-        params: {
-          id: res.data.resume_id,
-          name: res.data.resume_name,
-        },
+        pathname: `/resumes/[id]/edit`,
+        params: { id: res.data.resume_id },
       });
-
     } catch (error) {
       console.error(error);
     }
