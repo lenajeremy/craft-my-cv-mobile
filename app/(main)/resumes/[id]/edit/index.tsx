@@ -1,15 +1,13 @@
 import Box from "@/components/ui/box";
 import ScreenContainer from "@/components/ui/screen-container";
 import { useLocalSearchParams } from "expo-router";
-import { unslugify, toTitleCase } from "@/utils/text";
 import CardLink from "@/components/ui/card-link";
 
-export default function ResumeEdit() {
-  const { id } = useLocalSearchParams();
-  const title = toTitleCase(unslugify(id as string));
 
+export default function ResumeEdit() {
+  const { name } = useLocalSearchParams();
   return (
-    <ScreenContainer showHeaderTitle headerTitle={title}>
+    <ScreenContainer showHeaderTitle headerTitle={name as string}>
       <Box gap="m" mt="default">
         <CardLink href="./personal-information" title="Personal Information" />
         <CardLink title="Work Experience" href="./work-experience" />

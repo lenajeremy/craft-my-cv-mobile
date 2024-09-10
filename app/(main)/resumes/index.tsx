@@ -6,11 +6,10 @@ import ResumeTemplatePreview from "@/components/resume-template-preview";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
 import Button from "@/components/ui/button";
-import { useRouter } from "expo-router";
+import { Href, useRouter } from "expo-router";
 import { useListAllTemplatesQuery } from "@/http/templatesApi";
-import { useCreateNewResumeMutation } from "@/http/resumeApi";
+import { useCreateNewResumeMutation, useListUserResumesQuery } from "@/http/resumeApi";
 import { useAppSelector } from "@/hooks/redux";
-
 
 export default function Resumes() {
   const { width } = useWindowDimensions();
@@ -18,30 +17,36 @@ export default function Resumes() {
   const templateWidth = (width - spacing.default * 2) * 0.9;
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const router = useRouter();
-  const { userId } = useAppSelector(state => state.user);
+  const { userId } = useAppSelector((state) => state.user);
   const { data, isLoading, isError } = useListAllTemplatesQuery({
     page: 1,
     pageCount: 10,
   });
 
-  const [createNewResume, { isLoading: isCreatingResume }] = useCreateNewResumeMutation()
-
-  // const {} = useCreateResumeMutation()
+  const [createNewResume, { isLoading: isCreatingResume }] =
+    useCreateNewResumeMutation();
 
   const onSelectTemplate = async () => {
     if (!selectedTemplate) {
       return;
     }
-    
+
     try {
       const res = await createNewResume({
         template_id: selectedTemplate,
         owner_id: userId,
-      }).unwrap()
+      }).unwrap();
 
-      router.replace(`/resumes/${res.data.resume_id}/edit`);
+      router.replace({
+        pathname: "/resumes/[id]/edit",
+        params: {
+          id: res.data.resume_id,
+          name: res.data.resume_name,
+        },
+      });
+
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   };
 
@@ -51,13 +56,9 @@ export default function Resumes() {
         Choose a template
       </Text>
 
-      {
-        isLoading && <Text>Loading...</Text>
-      }
+      {isLoading && <Text>Loading...</Text>}
 
-      {
-        isError && <Text>Error loading templates</Text>
-      }
+      {isError && <Text>Error loading templates</Text>}
 
       <ScrollView
         horizontal
@@ -87,9 +88,7 @@ export default function Resumes() {
         buttonStyles={{ width: "100%" }}
         variant="contained"
       >
-        {
-          isCreatingResume ? "Crafting resume..." : "Craft with this template"
-        }
+        {isCreatingResume ? "Crafting resume..." : "Craft with this template"}
       </Button>
     </ScreenContainer>
   );
