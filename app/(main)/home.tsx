@@ -52,7 +52,7 @@ function HomeHeading() {
         />
         <Text variant="h3">CraftMyCV</Text>
       </Box>
-      <Link href={"/"} asChild>
+      <Link href={"/profile"} asChild>
         <Pressable>
           <UserCircleSVG width={36} height={36} />
         </Pressable>

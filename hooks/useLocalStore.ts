@@ -2,7 +2,7 @@ import * as React from 'react'
 import  AsyncStorage from '@react-native-async-storage/async-storage'
 
 
-const useLocalStore = <T>(key: string): [T | null, (v: T) => void] => {
+const useLocalStore = <T>(key: string): [T | null, (v: T) => void, () => void] => {
     const [v, setV] = React.useState<T | null>(null)
 
     React.useEffect(() => {
@@ -25,8 +25,12 @@ const useLocalStore = <T>(key: string): [T | null, (v: T) => void] => {
             console.error(error)
         }
     }, [key])
+
+    const clearAllKeys = async () => {
+        await AsyncStorage.clear()
+    }
     
-    return [v, update]
+    return [v, update, clearAllKeys]
 }
 
 

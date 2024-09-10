@@ -7,7 +7,10 @@ import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
 import Button from "@/components/ui/button";
 import { useRouter } from "expo-router";
-import { slugify } from "@/utils/text";
+import { useListAllTemplatesQuery } from "@/http/templatesApi";
+import { useCreateNewResumeMutation } from "@/http/resumeApi";
+import { useAppSelector } from "@/hooks/redux";
+
 
 export default function Resumes() {
   const { width } = useWindowDimensions();
@@ -15,17 +18,31 @@ export default function Resumes() {
   const templateWidth = (width - spacing.default * 2) * 0.9;
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const router = useRouter();
+  const { userId } = useAppSelector(state => state.user);
+  const { data, isLoading, isError } = useListAllTemplatesQuery({
+    page: 1,
+    pageCount: 10,
+  });
 
-  const onSelectTemplate = () => {
+  const [createNewResume, { isLoading: isCreatingResume }] = useCreateNewResumeMutation()
+
+  // const {} = useCreateResumeMutation()
+
+  const onSelectTemplate = async () => {
     if (!selectedTemplate) {
       return;
     }
+    
+    try {
+      const res = await createNewResume({
+        template_id: selectedTemplate,
+        owner_id: userId,
+      }).unwrap()
 
-    // speak to the backend to create the resume
-    // get the resume id.. for now we'll just use the template name slug
-    const slug = slugify(selectedTemplate);
-
-    router.replace(`/resumes/${slug}/edit`);
+      router.replace(`/resumes/${res.data.resume_id}/edit`);
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   return (
@@ -33,6 +50,14 @@ export default function Resumes() {
       <Text variant="title" fontWeight={"bold"}>
         Choose a template
       </Text>
+
+      {
+        isLoading && <Text>Loading...</Text>
+      }
+
+      {
+        isError && <Text>Error loading templates</Text>
+      }
 
       <ScrollView
         horizontal
@@ -42,46 +67,18 @@ export default function Resumes() {
         snapToAlignment="start"
         snapToInterval={templateWidth}
       >
-        <ResumeTemplatePreview
-          width={templateWidth - 16}
-          image={require("@/assets/images/template-1.png")}
-          name="Template One"
-          selected={selectedTemplate === "Template One"}
-          onSelect={setSelectedTemplate}
-          description="Minimalist White and Grey Professional Resume"
-        />
-        <ResumeTemplatePreview
-          width={templateWidth - 16}
-          image={require("@/assets/images/template-2.png")}
-          name="Template Two"
-          selected={selectedTemplate === "Template Two"}
-          onSelect={setSelectedTemplate}
-          description="Gray and White Simple Clean Resume"
-        />
-        <ResumeTemplatePreview
-          width={templateWidth - 16}
-          image={require("@/assets/images/template-3.png")}
-          name="Template Three"
-          selected={selectedTemplate === "Template Three"}
-          onSelect={setSelectedTemplate}
-          description="Minimalist White and Grey Professional Resume"
-        />
-        <ResumeTemplatePreview
-          width={templateWidth - 16}
-          image={require("@/assets/images/template-4.png")}
-          name="Template Four"
-          selected={selectedTemplate === "Template Four"}
-          onSelect={setSelectedTemplate}
-          description="Minimalist White and Grey Professional Resume"
-        />
-        <ResumeTemplatePreview
-          width={templateWidth - 16}
-          image={require("@/assets/images/template-5.png")}
-          name="Template Five"
-          selected={selectedTemplate === "Template Five"}
-          onSelect={setSelectedTemplate}
-          description="Minimalist White and Grey Professional Resume"
-        />
+        {data?.data.templates.map((template) => (
+          <ResumeTemplatePreview
+            key={template.id}
+            id={template.id}
+            width={templateWidth - 16}
+            image={template.image_url}
+            name={template.name}
+            selected={selectedTemplate === template.id}
+            onSelect={setSelectedTemplate}
+            description={template.description}
+          />
+        ))}
       </ScrollView>
 
       <Button
@@ -90,7 +87,9 @@ export default function Resumes() {
         buttonStyles={{ width: "100%" }}
         variant="contained"
       >
-        Craft with this template
+        {
+          isCreatingResume ? "Crafting resume..." : "Craft with this template"
+        }
       </Button>
     </ScreenContainer>
   );

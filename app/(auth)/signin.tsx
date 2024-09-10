@@ -16,7 +16,8 @@ import { Link, router } from "expo-router";
 import { ActivityIndicator, Pressable } from "react-native";
 import { useLoginMutation } from "@/http/authApi";
 import useLocalStore from "@/hooks/useLocalStore";
-
+import { updateUser } from "@/store/userSlice";
+import { useAppDispatch } from "@/hooks/redux";
 
 export default function SignIn() {
   const { colors } = useTheme<Theme>();
@@ -24,21 +25,27 @@ export default function SignIn() {
     email: "",
     password: "",
   });
+  const dispatch = useAppDispatch();
 
-  const [token, updateToken] = useLocalStore<string>("token")
+  const [token, updateToken] = useLocalStore<string>("token");
 
   const [login, { isLoading }] = useLoginMutation();
 
   const handleLogin = async () => {
     try {
       const res = await login(loginDetails).unwrap();
-      updateToken(res.data.token)
-      console.log(res)
-
-      setTimeout(() => {
-        router.push("/home")
-      }, 5000)
-
+      updateToken(res.data.token);
+      dispatch(
+        updateUser({
+          email: res.data.email,
+          name: res.data.name,
+          token: res.data.token,
+          userId: res.data.user_id,
+          plan: res.data.plan,
+        })
+      );
+      
+      router.push("/home");
     } catch (err) {
       console.error(err);
     }

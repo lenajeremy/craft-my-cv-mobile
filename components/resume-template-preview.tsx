@@ -4,7 +4,8 @@ import Text from "./ui/text";
 import { Image, Pressable } from "react-native";
 
 export type ResumeTemplatePreviewProps = {
-  image: number;
+  id: string;
+  image: string;
   name: string;
   width: number;
   description: string;
@@ -12,30 +13,34 @@ export type ResumeTemplatePreviewProps = {
   onSelect: (v: string) => void;
 };
 
-// TODO: Fix the image import to use live urls
 export default function ResumeTemplatePreview({
   image,
   name,
   description,
   selected,
   onSelect,
+  id,
   width: templateWidth,
 }: ResumeTemplatePreviewProps) {
   return (
-    <Pressable onPress={() => onSelect(name)}>
+    <Pressable onPress={() => onSelect(id)}>
       <Box
         width={templateWidth}
         borderRadius={20}
         py="s"
+        flex = {0.85}
         borderWidth={1}
         borderColor={selected ? "primaryFaded" : "border"}
         style={{ paddingHorizontal: 10 }}
       >
         <Image
-          source={image}
+          source={{ uri: image }}
           style={{
             width: "100%",
             height: 400,
+            marginBottom: 16,
+            borderTopRightRadius: 20,
+            borderTopLeftRadius: 20,
           }}
           resizeMode="cover"
         />
