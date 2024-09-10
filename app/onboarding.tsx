@@ -8,10 +8,12 @@ import OnboardingSvg3 from "@/assets/icons/onboarding-svg-3";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
 import { router } from "expo-router";
-import useLocalStore from "@/hooks/useLocalStore";
+import useLocalStore, { LOCAL_STORE_KEYS } from "@/hooks/useLocalStore";
 
 function Onboarding() {
-  const [, setHasSeenOnboarding] = useLocalStore<boolean>("hasSeenOnboarding")
+  const [, setHasSeenOnboarding] = useLocalStore<boolean>(
+    LOCAL_STORE_KEYS.HAS_SEEN_ONBOARDING
+  );
 
   const pages: OnboardinPageProps[] = [
     {

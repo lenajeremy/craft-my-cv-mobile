@@ -15,7 +15,7 @@ import { useTheme } from "@shopify/restyle";
 import { Link, router } from "expo-router";
 import { ActivityIndicator, Pressable } from "react-native";
 import { useLoginMutation } from "@/http/authApi";
-import useLocalStore from "@/hooks/useLocalStore";
+import useLocalStore, { LOCAL_STORE_KEYS } from "@/hooks/useLocalStore";
 import { updateUser } from "@/store/userSlice";
 import { useAppDispatch } from "@/hooks/redux";
 
@@ -27,7 +27,12 @@ export default function SignIn() {
   });
   const dispatch = useAppDispatch();
 
-  const [token, updateToken] = useLocalStore<string>("token");
+  const [token, updateToken] = useLocalStore<string>(
+    LOCAL_STORE_KEYS.JWT_TOKEN
+  );
+  const [, updateUserId] = useLocalStore<string>(
+    LOCAL_STORE_KEYS.USER_ID
+  );
 
   const [login, { isLoading }] = useLoginMutation();
 
@@ -35,6 +40,7 @@ export default function SignIn() {
     try {
       const res = await login(loginDetails).unwrap();
       updateToken(res.data.token);
+      updateUserId(res.data.user_id);
       dispatch(
         updateUser({
           email: res.data.email,
@@ -44,7 +50,7 @@ export default function SignIn() {
           plan: res.data.plan,
         })
       );
-      
+
       router.push("/home");
     } catch (err) {
       console.error(err);

@@ -2,7 +2,19 @@ import * as React from 'react'
 import  AsyncStorage from '@react-native-async-storage/async-storage'
 
 
-const useLocalStore = <T>(key: string): [T | null, (v: T) => void, () => void] => {
+
+export const LOCAL_STORE_KEYS = {
+    JWT_TOKEN: "CMCV_JWT_TOKEN",
+    HAS_SEEN_ONBOARDING: "CMCV_HAS_SEEN_ONBOARDING",
+    USER_ID: "CMCV_USER_ID"
+} as const
+
+type LocalKeys = keyof typeof LOCAL_STORE_KEYS
+type LocalValues = typeof LOCAL_STORE_KEYS[LocalKeys]
+
+
+
+const useLocalStore = <T>(key: LocalValues): [T | null, (v: T) => void, () => void] => {
     const [v, setV] = React.useState<T | null>(null)
 
     React.useEffect(() => {

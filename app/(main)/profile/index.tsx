@@ -2,14 +2,14 @@ import Box from "@/components/ui/box";
 import Text from "@/components/ui/text";
 import ScreenContainer from "@/components/ui/screen-container";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import useLocalStore from "@/hooks/useLocalStore";
+import useLocalStore, { LOCAL_STORE_KEYS } from "@/hooks/useLocalStore";
 import Button from "@/components/ui/button";
 import { updateUser } from "@/store/userSlice";
 import { useRouter, useNavigation } from "expo-router";
 
 export default function ProfileScreen() {
   const user = useAppSelector((state) => state.user);
-  const [, , clearAllKeys] = useLocalStore("token");
+  const [, , clearAllKeys] = useLocalStore(LOCAL_STORE_KEYS.JWT_TOKEN);
   const dispatch = useAppDispatch();
   const navigation = useNavigation()
 
