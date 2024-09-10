@@ -5,7 +5,6 @@ import {
   PressableProps,
   StyleSheet,
   TextStyle,
-  useColorScheme,
 } from "react-native";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
@@ -47,7 +46,10 @@ const Button = (props: ButtonProps) => {
         disabled: {
           opacity: 0.3,
         },
-        text: { fontSize: 16, fontWeight: '700' },
+        text: {
+          fontSize: 18,
+          fontWeight: "800",
+        },
       }),
     [colors]
   );
@@ -74,7 +76,9 @@ const Button = (props: ButtonProps) => {
     >
       <Box flexDirection="row" alignItems="center" gap="s">
         {props.icon && props.icon}
-        {props.isLoading && <ActivityIndicator size="small" color={colors.white} />}
+        {props.isLoading && (
+          <ActivityIndicator size="small" color={colors.white} />
+        )}
         <Text
           fontWeight="600"
           style={[

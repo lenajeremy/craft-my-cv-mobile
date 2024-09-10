@@ -32,8 +32,16 @@ export default function ResumeEditLayout() {
 
   React.useEffect(() => {
     (async function () {
+      console.log(JSON.stringify(data, null, 3));
       if (data) {
-        formMethods.reset(data.data);
+        formMethods.reset({
+          ...data.data,
+          experiences: data.data.experiences?.map((exp) => ({
+            ...exp,
+            startDate: new Date(exp.startDate),
+            endDate: new Date(exp.endDate),
+          })),
+        });
       }
     })();
   }, [data, formMethods]);

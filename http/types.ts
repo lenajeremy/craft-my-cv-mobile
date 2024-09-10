@@ -46,9 +46,12 @@ export type Education = {
 
 export type Experience = {
     company: string;
-    workDone: string;
+    location: string;
+    responsibilities: string;
+    role: string;
     startDate: Date;
     endDate: Date;
+    id: string;
 }
 
 export type Tool = string

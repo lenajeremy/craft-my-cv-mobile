@@ -131,7 +131,14 @@ function Resume(props: {
     >
       <Pressable
         style={{ flex: 1 }}
-        onPress={() => router.push(`/resumes/${props.id}/edit`)}
+        onPress={() =>
+          router.push({
+            pathname: "/resumes/[id]/edit",
+            params: {
+              id: props.id,
+            }
+          })
+        }
       >
         <Box flexDirection="row" gap="s" alignItems="center">
           <TemplateSVG />

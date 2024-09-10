@@ -29,10 +29,11 @@ export default function TextInput(props: TextInputProps) {
           ...textVariants.title,
           lineHeight: 21,
           flex: 1,
+          color: colors.headingText,
           paddingVertical: props.variant === "outlined" ? spacing.s : 12,
         },
       }),
-    [spacing, textVariants, props.variant]
+    [spacing, textVariants, props.variant, colors]
   );
 
   return (

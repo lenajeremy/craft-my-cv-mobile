@@ -8,6 +8,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { useEditResumeMutation } from "@/http/resumeApi";
 import { router } from "expo-router";
 
+
 export default function PersonalInformation() {
   const { control, handleSubmit } = useFormContext<Resume>();
   const [editResume, { isLoading }] = useEditResumeMutation()
@@ -76,7 +77,6 @@ export default function PersonalInformation() {
             render={({ field }) => (
               <TextInput
                 containerProps={{flex: 1}}
-                autoFocus
                 showLabel
                 label="Last name"
                 placeholder="Doe"
