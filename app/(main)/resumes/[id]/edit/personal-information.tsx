@@ -6,11 +6,10 @@ import TextInput from "@/components/ui/textinput";
 import { Resume } from "@/http/types";
 import { useFormContext, Controller } from "react-hook-form";
 import { useEditResumeMutation } from "@/http/resumeApi";
-import Text from "@/components/ui/text";
 import { router } from "expo-router";
 
 export default function PersonalInformation() {
-  const { control, handleSubmit, formState } = useFormContext<Resume>();
+  const { control, handleSubmit } = useFormContext<Resume>();
   const [editResume, { isLoading }] = useEditResumeMutation()
 
   const onSubmit = async (value: Resume) => {
