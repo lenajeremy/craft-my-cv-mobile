@@ -49,6 +49,7 @@ export default function SignIn() {
           token: res.data.token,
           userId: res.data.user_id,
           plan: res.data.plan,
+          hasValidSubscription: res.data.has_valid_subscription,
         })
       );
 

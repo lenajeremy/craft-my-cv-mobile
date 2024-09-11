@@ -1,11 +1,12 @@
 import Box from "@/components/ui/box";
 import Text from "@/components/ui/text";
 import ScreenContainer from "@/components/ui/screen-container";
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import GemstoneSVG from "@/assets/icons/gemstone";
 import { Image, Pressable } from "react-native";
-import CheckboxSVG from "@/assets/icons/checkbox";
 import Button from "@/components/ui/button";
+import PaymentPerk from "@/components/payment-perk";
+
 
 export default function PaywallModal() {
   return (
@@ -47,17 +48,17 @@ export default function PaywallModal() {
             style={{ width: 150, height: 150, alignSelf: "center" }}
           />
           <Box>
-            <Promotion
+            <PaymentPerk
               text={
                 "Unlimited access to all premium templates, including exclusive designs."
               }
             />
-            <Promotion
+            <PaymentPerk
               text={
                 "Advanced AI to fully optimize resumes, including tailored content, keyword optimization, and industry-specific guidance."
               }
             />
-            <Promotion
+            <PaymentPerk
               text={
                 "Access insights on resume views, downloads, and keyword match rates."
               }
@@ -83,24 +84,5 @@ export default function PaywallModal() {
         </Box>
       </Box>
     </ScreenContainer>
-  );
-}
-
-function Promotion(props: { text: string; bottom?: boolean }) {
-  return (
-    <Box
-      flexDirection="row"
-      alignItems="center"
-      gap="default"
-      px="s"
-      py="m"
-      borderBottomWidth={props.bottom ? 0 : 1}
-      borderBottomColor="border"
-    >
-      <CheckboxSVG />
-      <Box pr="s" flex={1}>
-        <Text variant="title" fontSize={17}>{props.text}</Text>
-      </Box>
-    </Box>
   );
 }

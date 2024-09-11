@@ -50,8 +50,8 @@ export default function ProfileScreen() {
       </Box>
 
       <Box g="default">
-        {user.plan.toLowerCase().includes("free") ? (
-          <Pressable onPress={() => router.navigate("/paywall")}>
+        {!user.hasValidSubscription ? (
+          <Pressable onPress={() => router.navigate("/payment-options")}>
             <Box
               flexDirection="row"
               borderWidth={1}
@@ -93,6 +93,7 @@ export default function ProfileScreen() {
           borderColor="border"
           borderRadius={16}
           py="xs"
+          mt={user.hasValidSubscription ? "l" : "none"}
         >
           <Box
             flexDirection="row"
@@ -139,12 +140,7 @@ export default function ProfileScreen() {
           </Box>
         </Box>
 
-        <Box
-          borderWidth={1}
-          borderColor="border"
-          borderRadius={16}
-          py="xs"
-        >
+        <Box borderWidth={1} borderColor="border" borderRadius={16} py="xs">
           <Box
             flexDirection="row"
             justifyContent="space-between"
@@ -209,6 +205,7 @@ export default function ProfileScreen() {
                 token: "",
                 userId: "",
                 plan: "",
+                hasValidSubscription: false,
               })
             );
 

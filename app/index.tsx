@@ -4,13 +4,15 @@ import { SplashScreen } from "expo-router";
 import { useFonts } from "expo-font";
 import { FONTS } from "@/constants";
 import useLocalStore, { LOCAL_STORE_KEYS } from "@/hooks/useLocalStore";
-import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { useAppDispatch } from "@/hooks/redux";
 import { updateUser } from "@/store/userSlice";
 import { useLazyGetUserDetailsQuery } from "@/http/userApi";
 import ScreenContainer from "@/components/ui/screen-container";
 import { ActivityIndicator } from "react-native";
 
+
 SplashScreen.preventAutoHideAsync();
+
 
 export default function App() {
   const {
@@ -47,6 +49,7 @@ export default function App() {
       if (tokenLoaded && hasSeenOnboardingLoaded && token) {
         try {
           const result = await getUserDetails({ token }).unwrap();
+          console.log(JSON.stringify(result, null, 3));
           dispatch(
             updateUser({
               token,
@@ -54,6 +57,7 @@ export default function App() {
               name: result.data.name,
               userId: result.data.id,
               plan: result.data.plan,
+              hasValidSubscription: result.data.hasValidSubscription,
             })
           );
           setAuthState({

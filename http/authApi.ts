@@ -15,6 +15,7 @@ const authApi = createApi({
                 email: string;
                 plan: string;
                 is_active: string;
+                has_valid_subscription: boolean;
             }>, {
                 email: string,
                 password: string

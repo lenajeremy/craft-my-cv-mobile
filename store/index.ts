@@ -4,6 +4,7 @@ import userSlice from "./userSlice";
 import templateApi from "@/http/templatesApi";
 import resumeApi from "@/http/resumeApi";
 import userApi from "@/http/userApi";
+import subscriptionsApi from "@/http/subscriptionsApi";
 
 
 const middleware = [
@@ -11,6 +12,7 @@ const middleware = [
     templateApi.middleware,
     resumeApi.middleware,
     userApi.middleware,
+    subscriptionsApi.middleware
 ]
 
 const store = configureStore({
@@ -20,6 +22,7 @@ const store = configureStore({
         [templateApi.reducerPath]: templateApi.reducer,
         [resumeApi.reducerPath]: resumeApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
+        [subscriptionsApi.reducerPath]: subscriptionsApi.reducer,
         "user": userSlice.reducer
     }
 })

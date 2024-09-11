@@ -21,7 +21,8 @@ const userApi = createApi({
             isActive: boolean,
             name: string,
             plan: string,
-        }>, {token: string}>({
+            hasValidSubscription: boolean;
+        }>, { token: string }>({
             query: (args) => ({
                 url: '/',
                 headers: {
@@ -36,6 +37,7 @@ const userApi = createApi({
                     isActive: res.data.is_active,
                     name: res.data.name,
                     plan: res.data.plan,
+                    hasValidSubscription: res.data.has_valid_subscription,
                 }
             })
         })

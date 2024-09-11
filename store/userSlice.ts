@@ -5,7 +5,8 @@ const initialState = {
     email: "",
     name: "",
     userId: "",
-    plan: ""
+    plan: "",
+    hasValidSubscription: false,
 }
 type InitialState = typeof initialState
 
@@ -19,6 +20,7 @@ const userSlice = createSlice({
             state.name = action.payload.name
             state.userId = action.payload.userId
             state.plan = action.payload.plan
+            state.hasValidSubscription = action.payload.hasValidSubscription
 
             return state
         }
