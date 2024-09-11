@@ -5,11 +5,12 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import useLocalStore, { LOCAL_STORE_KEYS } from "@/hooks/useLocalStore";
 import Button from "@/components/ui/button";
 import { updateUser } from "@/store/userSlice";
-import { useNavigation } from "expo-router";
+import { router, useNavigation } from "expo-router";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
 import ManOnLaptopSVG from "@/assets/icons/man-on-laptop";
 import ArrowRightSVG from "@/assets/icons/arrow-right";
+import { Pressable } from "react-native";
 
 export default function ProfileScreen() {
   const user = useAppSelector((state) => state.user);
@@ -50,44 +51,46 @@ export default function ProfileScreen() {
 
       <Box g="default">
         {user.plan.toLowerCase().includes("free") ? (
-          <Box
-            flexDirection="row"
-            borderWidth={1}
-            style={{ borderColor: "#EFEBFF" }}
-            px="m"
-            py="m"
-            pt="default"
-            mt="default"
-            borderRadius={16}
-            position="relative"
-          >
+          <Pressable onPress={() => router.navigate("/paywall")}>
             <Box
-              position="absolute"
-              backgroundColor="primary"
-              px="s"
-              py="xs"
-              borderRadius={100}
-              top={-12}
-              left={16}
+              flexDirection="row"
+              borderWidth={1}
+              style={{ borderColor: "#EFEBFF" }}
+              px="m"
+              py="m"
+              pt="default"
+              mt="default"
+              borderRadius={16}
+              position="relative"
             >
-              <Text font="Manrope-Bold" color="white" variant="small">
-                Save 12.5%
-              </Text>
+              <Box
+                position="absolute"
+                backgroundColor="primary"
+                px="s"
+                py="xs"
+                borderRadius={100}
+                top={-12}
+                left={16}
+              >
+                <Text font="Manrope-Bold" color="white" variant="small">
+                  Save 12.5%
+                </Text>
+              </Box>
+              <Box flex={1} gap="xs">
+                <Text variant="h3">Upgrade to Pro</Text>
+                <Text lineHeight={24} pr="m" color="mutedText">
+                  Enjoy full customization, advanced AI-driven suggestions to
+                  stand out in your job search.
+                </Text>
+              </Box>
+              <ManOnLaptopSVG />
             </Box>
-            <Box flex={1} gap="xs">
-              <Text variant="h3">Upgrade to Pro</Text>
-              <Text lineHeight={24} pr="m" color="mutedText">
-                Enjoy full customization, advanced AI-driven suggestions to
-                stand out in your job search.
-              </Text>
-            </Box>
-            <ManOnLaptopSVG />
-          </Box>
+          </Pressable>
         ) : null}
 
         <Box
           borderWidth={1}
-          style={{ borderColor: "#EAEEF2" }}
+          borderColor="border"
           borderRadius={16}
           py="xs"
         >
@@ -95,9 +98,9 @@ export default function ProfileScreen() {
             flexDirection="row"
             justifyContent="space-between"
             alignItems="center"
+            borderColor="border"
             borderBottomWidth={1}
             style={{
-              borderColor: "#EAEEF2",
               paddingVertical: 20,
               paddingHorizontal: 16,
             }}
@@ -112,8 +115,8 @@ export default function ProfileScreen() {
             justifyContent="space-between"
             alignItems="center"
             borderBottomWidth={1}
+            borderColor="border"
             style={{
-              borderColor: "#EAEEF2",
               paddingVertical: 20,
               paddingHorizontal: 16,
             }}
@@ -138,7 +141,7 @@ export default function ProfileScreen() {
 
         <Box
           borderWidth={1}
-          style={{ borderColor: "#EAEEF2" }}
+          borderColor="border"
           borderRadius={16}
           py="xs"
         >
@@ -147,8 +150,8 @@ export default function ProfileScreen() {
             justifyContent="space-between"
             alignItems="center"
             borderBottomWidth={1}
+            borderColor="border"
             style={{
-              borderColor: "#EAEEF2",
               paddingVertical: 20,
               paddingHorizontal: 16,
             }}
@@ -163,8 +166,8 @@ export default function ProfileScreen() {
             justifyContent="space-between"
             alignItems="center"
             borderBottomWidth={1}
+            borderColor="border"
             style={{
-              borderColor: "#EAEEF2",
               paddingVertical: 20,
               paddingHorizontal: 16,
             }}
@@ -194,7 +197,7 @@ export default function ProfileScreen() {
             borderWidth: 1.5,
             width: "50%",
             alignSelf: "center",
-            marginBottom: 100
+            marginBottom: 100,
           }}
           textStyle={{ color: "#F08F8F", fontFamily: "Manrope-Bold" }}
           onPress={async () => {

@@ -9,7 +9,7 @@ const palette = {
     white: '#FFFFFF',
     neutral: "#4A5568",
     muted: "#7C8289",
-    lightGray: "#CBD5E0"
+    lightGray: "#EAEEF2"
 };
 
 const theme = createTheme({

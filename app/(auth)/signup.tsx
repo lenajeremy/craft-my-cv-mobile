@@ -45,6 +45,7 @@ export default function Signup() {
     console.log(JSON.stringify(res))
     
   } catch (error) {
+    console.error(error)
     // Burnt.toast({ message: error.data.data.error, preset: 'error', title: "Error logging in"})
   }
   };
