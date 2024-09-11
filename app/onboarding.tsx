@@ -11,7 +11,7 @@ import { router } from "expo-router";
 import useLocalStore, { LOCAL_STORE_KEYS } from "@/hooks/useLocalStore";
 
 function Onboarding() {
-  const [, setHasSeenOnboarding] = useLocalStore<boolean>(
+  const { update: setHasSeenOnboarding } = useLocalStore<boolean>(
     LOCAL_STORE_KEYS.HAS_SEEN_ONBOARDING
   );
 

@@ -27,11 +27,11 @@ export default function SignIn() {
   });
   const dispatch = useAppDispatch();
 
-  const [,updateToken] = useLocalStore<string>(
+  const { update: updateToken } = useLocalStore<string>(
     LOCAL_STORE_KEYS.JWT_TOKEN
   );
-  
-  const [, updateUserId] = useLocalStore<string>(
+
+  const { update: updateUserId } = useLocalStore<string>(
     LOCAL_STORE_KEYS.USER_ID
   );
 

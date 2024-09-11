@@ -6,18 +6,30 @@ import useLocalStore, { LOCAL_STORE_KEYS } from "@/hooks/useLocalStore";
 import Button from "@/components/ui/button";
 import { updateUser } from "@/store/userSlice";
 import { useNavigation } from "expo-router";
+import { useTheme } from "@shopify/restyle";
+import { Theme } from "@/theme";
 
 export default function ProfileScreen() {
   const user = useAppSelector((state) => state.user);
-  const [, , clearAllKeys] = useLocalStore(LOCAL_STORE_KEYS.JWT_TOKEN);
+  const { clearAll: clearAllKeys } = useLocalStore(LOCAL_STORE_KEYS.JWT_TOKEN);
   const dispatch = useAppDispatch();
-  const navigation = useNavigation()
+  const navigation = useNavigation();
+
+  const { colors  } = useTheme<Theme>()
 
   return (
-    <ScreenContainer showHeaderTitle headerTitle="User Profile">
-      <Box>
-        <Text variant="h1">Profile for {user.name}</Text>
-        <Text variant="title">{JSON.stringify(user, null, 3)}</Text>
+    <ScreenContainer showHeaderTitle headerTitle="Profile">
+      <Box flexDirection="row" justifyContent="space-between" alignItems="center">
+        <Box>
+          <Text variant="h3">{user.name}</Text>
+          <Text variant="body" color="mainText">{user.email}</Text>
+        </Box>
+        
+        <Box borderRadius={16} style = {{ backgroundColor: colors.primaryFaded + '50', paddingVertical: 6, paddingHorizontal: 12 }}>
+            <Text variant="small" font="Manrope-SemiBold" color="primary">
+                {user.plan || "Free"}
+            </Text>
+        </Box>
       </Box>
 
       <Button
@@ -34,7 +46,7 @@ export default function ProfileScreen() {
               plan: "",
             })
           );
-          
+
           navigation.reset({
             index: 0,
             routes: [{ name: "index" as never }],

@@ -6,28 +6,33 @@ import { FONTS } from "@/constants";
 import useLocalStore, { LOCAL_STORE_KEYS } from "@/hooks/useLocalStore";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { updateUser } from "@/store/userSlice";
+import { useLazyGetUserDetailsQuery } from "@/http/userApi";
+import ScreenContainer from "@/components/ui/screen-container";
+import { ActivityIndicator } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const [token] = useLocalStore<string>(LOCAL_STORE_KEYS.JWT_TOKEN);
-  const [hasSeenOnboarding] = useLocalStore<boolean>(
-    LOCAL_STORE_KEYS.HAS_SEEN_ONBOARDING
-  );
-  const [userId] = useLocalStore<string>(LOCAL_STORE_KEYS.USER_ID);
+  const {
+    value: token,
+    loaded: tokenLoaded,
+  } = useLocalStore<string>(LOCAL_STORE_KEYS.JWT_TOKEN);
+  const {
+    value: hasSeenOnboarding,
+    loaded: hasSeenOnboardingLoaded,
+  } = useLocalStore<boolean>(LOCAL_STORE_KEYS.HAS_SEEN_ONBOARDING);
 
-  const isLoggedIn = token ? true : false;
-  const isFirstTime = hasSeenOnboarding ? false : true;
+
+  const [authState, setAuthState] = React.useState({
+    isLoading: true,
+    isLoggedIn: false,
+    isFirstTime: false,
+  });
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector(state => state.user);
 
-
-  React.useEffect(() => {
-    if (userId) {
-      dispatch(updateUser({ ...user, userId }));
-    }
-  }, [dispatch, user, userId]);
+  const [getUserDetails] =
+    useLazyGetUserDetailsQuery();
 
   const [loaded, error] = useFonts(FONTS);
 
@@ -37,13 +42,63 @@ export default function App() {
     }
   }, [loaded, error]);
 
+  React.useEffect(() => {
+    (async function () {
+      if (tokenLoaded && hasSeenOnboardingLoaded && token) {
+        try {
+          const result = await getUserDetails({ token }).unwrap();
+          dispatch(
+            updateUser({
+              token,
+              email: result.data.email,
+              name: result.data.name,
+              userId: result.data.id,
+              plan: result.data.plan,
+            })
+          );
+          setAuthState({
+            isLoading: false,
+            isLoggedIn: true,
+            isFirstTime: false,
+          });
+        } catch (error) {
+          console.log(error);
+          setAuthState({
+            isLoading: false,
+            isLoggedIn: false,
+            isFirstTime: !hasSeenOnboarding,
+          });
+        }
+      } else if (tokenLoaded && hasSeenOnboardingLoaded && !token) {
+        setAuthState({
+          isLoading: false,
+          isLoggedIn: false,
+          isFirstTime: !hasSeenOnboarding,
+        });
+      }
+    })();
+  }, [token, getUserDetails, hasSeenOnboarding, tokenLoaded, hasSeenOnboardingLoaded, dispatch]);
+
   if (!loaded && !error) {
     return null;
   }
 
-  if (isFirstTime) {
+  if (authState.isLoading) {
+    return (
+      <ScreenContainer
+        contentContainerProps={{
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <ActivityIndicator />
+      </ScreenContainer>
+    );
+  }
+
+  if (authState.isFirstTime) {
     return <Redirect href="/onboarding" />;
-  } else if (isLoggedIn) {
+  } else if (authState.isLoggedIn) {
     return <Redirect href="/home" />;
   } else {
     return <Redirect href="/signin" />;
