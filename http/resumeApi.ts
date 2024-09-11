@@ -75,7 +75,15 @@ const resumeApi = createApi({
                         role: exp.role,
                     })) || [],
                     tools: res.data.tools || [],
-                    education: res.data.education || [],
+                    education: res.data.education?.map((edu: any) => ({
+                        id: edu.id,
+                        startDate: edu.start_date,
+                        endDate: edu.end_date,
+                        courseStudied: edu.course_studied,
+                        degree: edu.degree,
+                        school: edu.school,
+                        grade: edu.grade,
+                    })) || [],
                     others: res.data.other || {},
                     id: res.data.id,
                 }
@@ -105,7 +113,15 @@ const resumeApi = createApi({
                             role: exp.role,
                         })),
                         tools: rest.tools,
-                        education: rest.education,
+                        education: rest.education?.map(education => ({
+                            id: education.id,
+                            degree: education.degree,
+                            end_date: education.endDate,
+                            start_date: education.startDate,
+                            course_studied: education.courseStudied,
+                            grade: education.grade,
+                            school: education.school
+                        })),
                     },
                 }
             },

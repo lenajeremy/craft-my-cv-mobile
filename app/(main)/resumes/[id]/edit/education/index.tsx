@@ -1,26 +1,54 @@
 import PlusSVG from "@/assets/icons/plus-icon";
 import Box from "@/components/ui/box";
+import Text from "@/components/ui/text";
 import Button from "@/components/ui/button";
 import CardLink from "@/components/ui/card-link";
 import ScreenContainer from "@/components/ui/screen-container";
+import { Resume } from "@/http/types";
 import { useRouter } from "expo-router";
+import { useFormContext } from "react-hook-form";
+import uuid from "react-native-uuid";
+
 
 export default function Education() {
-  const schools = ["Princeton University", "University of Lagos"];
-
   const router = useRouter();
+  const { watch, setValue } = useFormContext<Resume>();
+  const education = watch("education") || [];
+
+  const handleAddEducation = () => {
+    const newEducation = { 
+      id: uuid.v4() as string,
+      school: "",
+      degree: "",
+      startDate: new Date(),
+      endDate: new Date(),
+      grade: "",
+      courseStudied: "",
+    }
+
+    setValue("education", [...education, newEducation]);
+
+    router.push(`./${newEducation.id}/edit`);
+  };
+
 
   return (
     <ScreenContainer showHeaderTitle headerTitle="Education">
       <Box gap="m" mt="default">
-        {schools.map((school, i) => (
-          <CardLink href={`./edit`} title={school} key={school} />
-        ))}
+        {education.length === 0 ? (
+          <Box alignItems="center" my="l">
+            <Text textAlign="center">No education added</Text>
+          </Box>
+        ) : 
+          education.map((education) => (
+            <CardLink href={`./${education.id}/edit`} title={education.school} key={education.id} />
+          ))
+        }
 
         <Box alignItems="center" mt="l">
           <Button
             variant="outlined"
-            onPress={() => router.push("./edit")}
+            onPress={handleAddEducation}
             icon={<PlusSVG />}
           >
             Add Another

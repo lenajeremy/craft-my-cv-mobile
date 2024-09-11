@@ -41,6 +41,11 @@ export default function ResumeEditLayout() {
             startDate: new Date(exp.startDate),
             endDate: new Date(exp.endDate),
           })),
+          education: data.data.education?.map((edu) => ({
+            ...edu,
+            startDate: new Date(edu.startDate),
+            endDate: new Date(edu.endDate),
+          })),
         });
       }
     })();

@@ -1,18 +1,11 @@
 [
     {
-        "id": "1fcbcb24-e42b-4132-b2dd-ee2b9984f861",
-        "company": "Microsoft",
-        "location": "Redmond, California",
-        "responsibilities": "I\u2019m an IDAN\nI won award\nPublished articles\nPushed products\nMade billions for the company ",
-        "start_date": "2024-09-10T18:09:32.789Z",
-        "end_date": "2024-09-10T18:09:32.789Z"
-    },
-    {
-        "id": "be92ea29-078a-4701-a18e-3f5f3265938f",
-        "company": "The Boring Company (Edo",
-        "location": "Austin, Texas",
-        "responsibilities": "Gave Elon a hell of a time",
-        "start_date": "2024-09-10T18:15:23.233Z",
-        "end_date": "2024-09-10T18:15:23.233Z"
+        "id": "540fb530-1407-41b7-ab38-ecad64288ff9",
+        "school": "University of Lagos ",
+        "degree": "Bachelors ",
+        "start_date": "2024-09-11T05:36:05.226Z",
+        "end_date": "2024-09-11T05:36:05.226Z",
+        "course_studied": "Computer Science ",
+        "grade": "Bachelors "
     }
 ]

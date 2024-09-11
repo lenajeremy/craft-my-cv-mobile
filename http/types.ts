@@ -37,11 +37,13 @@ export type Resume = {
 }
 
 export type Education = {
+    id: string;
     school: string;
     degree: string;
     startDate: Date;
     endDate: Date;
-    description: string;
+    grade: string;
+    courseStudied: string;
 }
 
 export type Experience = {
