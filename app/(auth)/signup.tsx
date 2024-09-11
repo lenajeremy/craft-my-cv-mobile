@@ -21,7 +21,6 @@ import { useRegisterMutation } from "@/http/authApi";
 
 export default function Signup() {
   const { colors } = useTheme<Theme>();
-  const [checked, setChecked] = React.useState(false);
   const [register, { isLoading }] = useRegisterMutation();
 
   const [signupForm, setSignupForm] = React.useState({
@@ -143,6 +142,7 @@ export default function Signup() {
 
         <Button
           onPress={handleSignUp}
+          isLoading={isLoading}
           disabled={!signupForm.acceptsTerms}
           buttonStyles={{ marginVertical: 10 }}
           variant="contained"

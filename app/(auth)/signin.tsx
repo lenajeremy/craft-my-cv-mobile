@@ -104,10 +104,10 @@ export default function SignIn() {
           variant="contained"
           onPress={handleLogin}
           buttonStyles={{ marginVertical: 10 }}
+          isLoading={isLoading}
         >
           Sign In
         </Button>
-        {isLoading && <ActivityIndicator />}
         <Box py="l" gap="l" alignItems="center">
           <Text>
             Don't have an account?{" "}

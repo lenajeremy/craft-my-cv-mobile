@@ -76,7 +76,7 @@ const theme = createTheme({
             color: "mutedText"
         },
         defaults: {
-            fontSize: 17,
+            fontSize: 16,
             lineHeight: 20,
             color: "mainText",
             fontFamily: "Manrope-Regular" as Font
@@ -94,7 +94,7 @@ const darkTheme = {
         border: palette.neutral,
         primary: palette.purple,
         primary2: palette.purple2,
-        primaryFaded: palette.purple2,
+        primaryFaded: palette.purpleLight,
         white: palette.white,
         dark: palette.dark,
     }

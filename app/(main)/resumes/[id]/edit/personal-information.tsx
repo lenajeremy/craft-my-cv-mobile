@@ -145,7 +145,7 @@ export default function PersonalInformation() {
               onBlur={field.onBlur}
               onChangeText={field.onChange}
               value={field.value}
-              keyboardType="email-address"
+              keyboardType="default"
             />
           )}
         />
