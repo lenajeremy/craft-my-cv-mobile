@@ -11,6 +11,7 @@ import { useListAllTemplatesQuery } from "@/http/templatesApi";
 import { useCreateNewResumeMutation } from "@/http/resumeApi";
 import { useAppSelector } from "@/hooks/redux";
 
+
 export default function Resumes() {
   const { width } = useWindowDimensions();
   const { spacing } = useTheme<Theme>();
@@ -83,6 +84,7 @@ export default function Resumes() {
         onPress={onSelectTemplate}
         buttonStyles={{ width: "100%" }}
         variant="contained"
+        isLoading={isCreatingResume}
       >
         {isCreatingResume ? "Crafting resume..." : "Craft with this template"}
       </Button>

@@ -33,7 +33,8 @@ export type Resume = {
     tools?: Tool[],
     education?: Education[],
     others?: {},
-    id: string
+    id: string,
+    professionalSummary?: string
 }
 
 export type Education = {

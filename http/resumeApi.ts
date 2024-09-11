@@ -86,6 +86,7 @@ const resumeApi = createApi({
                     })) || [],
                     others: res.data.other || {},
                     id: res.data.id,
+                    professionalSummary: res.data.professional_summary,
                 }
             })
         }),
@@ -122,6 +123,7 @@ const resumeApi = createApi({
                             grade: education.grade,
                             school: education.school
                         })),
+                        professional_summary: rest.professionalSummary
                     },
                 }
             },
