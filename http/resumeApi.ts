@@ -74,7 +74,7 @@ const resumeApi = createApi({
                         end_date: exp.end_data,
                         role: exp.role,
                     })) || [],
-                    tools: res.data.tools || [],
+                    skills: res.data.skills || [],
                     education: res.data.education?.map((edu: any) => ({
                         id: edu.id,
                         startDate: edu.start_date,
@@ -113,7 +113,7 @@ const resumeApi = createApi({
                             responsibilities: exp.responsibilities,
                             role: exp.role,
                         })),
-                        tools: rest.tools,
+                        skills: rest.skills,
                         education: rest.education?.map(education => ({
                             id: education.id,
                             degree: education.degree,

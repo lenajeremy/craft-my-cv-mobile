@@ -26,7 +26,13 @@ export default function ScreenContainer(props: ScreenContainerProps) {
   const isDarkMode = useColorScheme() === "dark";
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.mainBackground }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: colors.mainBackground,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      }}
+    >
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}

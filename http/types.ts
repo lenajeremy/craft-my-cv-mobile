@@ -27,10 +27,11 @@ export type Resume = {
     resumeDescription?: string
     email?: string
     phoneNumber?: string
+    link?: string
     role?: string
     description?: string
     experiences?: Experience[],
-    tools?: Tool[],
+    skills?: Skill[],
     education?: Education[],
     others?: {},
     id: string,
@@ -57,4 +58,4 @@ export type Experience = {
     id: string;
 }
 
-export type Tool = string
+export type Skill = string
