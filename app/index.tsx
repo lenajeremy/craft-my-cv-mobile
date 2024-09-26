@@ -10,20 +10,14 @@ import { useLazyGetUserDetailsQuery } from "@/http/userApi";
 import ScreenContainer from "@/components/ui/screen-container";
 import { ActivityIndicator } from "react-native";
 
-
 SplashScreen.preventAutoHideAsync();
 
-
 export default function App() {
-  const {
-    value: token,
-    loaded: tokenLoaded,
-  } = useLocalStore<string>(LOCAL_STORE_KEYS.JWT_TOKEN);
-  const {
-    value: hasSeenOnboarding,
-    loaded: hasSeenOnboardingLoaded,
-  } = useLocalStore<boolean>(LOCAL_STORE_KEYS.HAS_SEEN_ONBOARDING);
-
+  const { value: token, loaded: tokenLoaded } = useLocalStore<string>(
+    LOCAL_STORE_KEYS.JWT_TOKEN
+  );
+  const { value: hasSeenOnboarding, loaded: hasSeenOnboardingLoaded } =
+    useLocalStore<boolean>(LOCAL_STORE_KEYS.HAS_SEEN_ONBOARDING);
 
   const [authState, setAuthState] = React.useState({
     isLoading: true,
@@ -33,8 +27,7 @@ export default function App() {
 
   const dispatch = useAppDispatch();
 
-  const [getUserDetails] =
-    useLazyGetUserDetailsQuery();
+  const [getUserDetails] = useLazyGetUserDetailsQuery();
 
   const [loaded, error] = useFonts(FONTS);
 
@@ -81,7 +74,14 @@ export default function App() {
         });
       }
     })();
-  }, [token, getUserDetails, hasSeenOnboarding, tokenLoaded, hasSeenOnboardingLoaded, dispatch]);
+  }, [
+    token,
+    getUserDetails,
+    hasSeenOnboarding,
+    tokenLoaded,
+    hasSeenOnboardingLoaded,
+    dispatch,
+  ]);
 
   if (!loaded && !error) {
     return null;

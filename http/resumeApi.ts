@@ -135,6 +135,9 @@ const resumeApi = createApi({
             }),
             invalidatesTags: ['RESUME_LIST']
         }),
+        getResumePreviewImage: build.query<ApiResponse<{resume_preview_url: string}>, {resumeId: string}>({
+            query: args => `${args.resumeId}/preview`
+        })
     })
 })
 
@@ -147,5 +150,6 @@ export const {
     useEditResumeMutation,
     useDeleteResumeMutation,
     useGetResumeByIDQuery,
-    useLazyGetResumeByIDQuery
+    useLazyGetResumeByIDQuery,
+    useGetResumePreviewImageQuery
 } = resumeApi
