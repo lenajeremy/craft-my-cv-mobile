@@ -8,6 +8,8 @@ import { Resume } from "@/http/types";
 import { useRouter } from "expo-router";
 import { useFormContext } from "react-hook-form";
 import uuid from "react-native-uuid";
+import { Pressable } from "react-native";
+import TrashSVG from "@/assets/icons/trash";
 
 export default function WorkExperience() {
   const router = useRouter();
@@ -35,6 +37,10 @@ export default function WorkExperience() {
     router.push(`./${newExperience.id}/edit`);
   };
 
+  const onDeleteExperience = (id: string) => {
+    setValue('experiences', workExperience?.filter(exp => exp.id !== id) || [])
+  }
+
   return (
     <ScreenContainer showHeaderTitle headerTitle="Work Experience">
       <Box gap="m" mt="default">
@@ -44,6 +50,24 @@ export default function WorkExperience() {
               href={`./${experience.id}/edit`}
               title={experience.company || "Untitled Company"}
               key={experience.id}
+              containerProps={{
+                py: "m",
+              }}
+              SuffixElement={
+                <Pressable
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    onDeleteExperience(experience.id)
+                  }}
+                  style={{
+                    backgroundColor: "#FCECEC",
+                    padding: 8,
+                    borderRadius: 100,
+                  }}
+                >
+                  <TrashSVG />
+                </Pressable>
+              }
             />
           ))
         ) : (

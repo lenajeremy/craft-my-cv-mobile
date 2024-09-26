@@ -8,7 +8,8 @@ import { Resume } from "@/http/types";
 import { useRouter } from "expo-router";
 import { useFormContext } from "react-hook-form";
 import uuid from "react-native-uuid";
-
+import { Pressable } from "react-native";
+import TrashSVG from "@/assets/icons/trash";
 
 export default function Education() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function Education() {
   const education = watch("education") || [];
 
   const handleAddEducation = () => {
-    const newEducation = { 
+    const newEducation = {
       id: uuid.v4() as string,
       school: "",
       degree: "",
@@ -24,13 +25,19 @@ export default function Education() {
       endDate: new Date(),
       grade: "",
       courseStudied: "",
-    }
+    };
 
     setValue("education", [...education, newEducation]);
 
     router.push(`./${newEducation.id}/edit`);
   };
 
+  const onDeleteEducation = (id: string) => {
+    setValue(
+      "education",
+      education.filter((edu) => edu.id !== id)
+    );
+  };
 
   return (
     <ScreenContainer showHeaderTitle headerTitle="Education">
@@ -39,11 +46,33 @@ export default function Education() {
           <Box alignItems="center" my="l">
             <Text textAlign="center">No education added</Text>
           </Box>
-        ) : 
+        ) : (
           education.map((education) => (
-            <CardLink href={`./${education.id}/edit`} title={education.school} key={education.id} />
+            <CardLink
+              href={`./${education.id}/edit`}
+              title={education.school}
+              key={education.id}
+              containerProps={{
+                py: "m",
+              }}
+              SuffixElement={
+                <Pressable
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    onDeleteEducation(education.id);
+                  }}
+                  style={{
+                    backgroundColor: "#FCECEC",
+                    padding: 8,
+                    borderRadius: 100,
+                  }}
+                >
+                  <TrashSVG />
+                </Pressable>
+              }
+            />
           ))
-        }
+        )}
 
         <Box alignItems="center" mt="l">
           <Button
