@@ -13,7 +13,7 @@ import TextInput from "@/components/ui/textinput";
 import { Theme } from "@/theme";
 import { useTheme } from "@shopify/restyle";
 import { Link, router } from "expo-router";
-import {  Pressable } from "react-native";
+import { Pressable } from "react-native";
 import { useLoginMutation } from "@/http/authApi";
 import useLocalStore, { LOCAL_STORE_KEYS } from "@/hooks/useLocalStore";
 import { updateUser } from "@/store/userSlice";

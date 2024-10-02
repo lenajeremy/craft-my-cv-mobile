@@ -87,16 +87,16 @@ const theme = createTheme({
 const darkTheme = {
     ...theme,
     colors: {
-        mainBackground: palette.dark,
-        mainText: palette.muted,
-        headingText: palette.white,
-        mutedText: palette.muted,
-        border: palette.neutral,
+        mainBackground: "#000000",
+        mainText: "#A8A8A8",
+        headingText: "#F5F5F5",
+        mutedText: "#737373",
+        border: "#262626",
         primary: palette.purple,
         primary2: palette.purple2,
         primaryFaded: palette.purpleLight,
         white: palette.white,
-        dark: palette.dark,
+        dark: "#000000",
     }
 }
 

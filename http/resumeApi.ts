@@ -71,7 +71,7 @@ const resumeApi = createApi({
                         location: exp.location,
                         responsibilities: exp.responsibilities,
                         startDate: exp.start_date,
-                        end_date: exp.end_data,
+                        endDate: exp.end_date,
                         role: exp.role,
                     })) || [],
                     skills: res.data.skills || [],
@@ -135,8 +135,11 @@ const resumeApi = createApi({
             }),
             invalidatesTags: ['RESUME_LIST']
         }),
-        getResumePreviewImage: build.query<ApiResponse<{resume_preview_url: string}>, {resumeId: string}>({
-            query: args => `${args.resumeId}/preview`
+        getResumePreview: build.query<ApiResponse<{ resume_preview_url: string }>, { resumeId: string }>({
+            query: args => `${args.resumeId}/preview`,
+        }),
+        downloadResume: build.query<ApiResponse<{ file_url: string }>, { resumeId: string, fileType: "pdf" | "docx" }>({
+            query: args => `${args.resumeId}/download/${args.fileType}`
         })
     })
 })
@@ -151,5 +154,7 @@ export const {
     useDeleteResumeMutation,
     useGetResumeByIDQuery,
     useLazyGetResumeByIDQuery,
-    useGetResumePreviewImageQuery
+    useGetResumePreviewQuery,
+    useDownloadResumeQuery,
+    useLazyDownloadResumeQuery,
 } = resumeApi

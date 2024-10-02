@@ -1,25 +1,67 @@
 import * as React from "react";
 import Box from "@/components/ui/box";
+import Text from "@/components/ui/text";
 import Button from "@/components/ui/button";
 import ScreenContainer from "@/components/ui/screen-container";
 import WebView from "react-native-webview";
-import Text from "@/components/ui/text";
-import { useGetResumePreviewImageQuery } from "@/http/resumeApi";
-import { ActivityIndicator, Dimensions, Image } from "react-native";
+import {
+  useGetResumePreviewQuery,
+  useLazyDownloadResumeQuery,
+} from "@/http/resumeApi";
+import { ActivityIndicator, Alert } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
+import { saveFileToDevice } from "@/utils/file-download";
+import { useFormContext } from "react-hook-form";
+import { Resume } from "@/http/types";
+import * as Sharing from "expo-sharing";
 
 export default function PreviewAndDownload() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { data, isFetching } = useGetResumePreviewImageQuery(
-    { resumeId: id },
-    { refetchOnMountOrArgChange: true }
-  );
-  const { spacing } = useTheme<Theme>();
 
-  const downloadPDf = () => {
-    console.log("downloadig file");
+  const { data: resumePreviewData, isFetching: loadingResumePreview } =
+    useGetResumePreviewQuery(
+      { resumeId: id },
+      { refetchOnMountOrArgChange: true }
+    );
+  const [downloadFileQuery, { isFetching: loadingResumeDownload }] =
+    useLazyDownloadResumeQuery();
+
+  const { getValues } = useFormContext<Resume>();
+  const { spacing } = useTheme<Theme>();
+  const [downloadProgress, setDownloadProgress] = React.useState(0);
+
+  const shareFile = async (uri: string) => {
+    if (await Sharing.isAvailableAsync()) {
+      await Sharing.shareAsync(uri, {
+        dialogTitle: "Where do you want your resume?",
+      });
+    } else {
+      Alert.alert("Sharing is not available");
+    }
+  };
+
+  const downloadFile = async (file: "pdf" | "docx") => {
+    const res = await downloadFileQuery({
+      resumeId: id,
+      fileType: file,
+    }).unwrap();
+
+    const { error, data } = await saveFileToDevice(
+      res.data.file_url,
+      `${getValues("firstName")} ${getValues("lastName")}'s Resume.${file}`,
+      (progress) => {
+        setDownloadProgress(progress * 100);
+      }
+    );
+
+    if (data) {
+      await shareFile(data.uri);
+      setDownloadProgress(0)
+    }
+
+    console.log(error, data);
   };
 
   return (
@@ -27,25 +69,41 @@ export default function PreviewAndDownload() {
       showHeaderTitle
       headerTitle="Preview & Download"
       ScreenFooterComponent={
-        <Box>
-          <Button variant="contained" onPress={downloadPDf}>
-            Download as PDF
+        <Box flexDirection="column" gap="s">
+          <Button
+            variant="contained"
+            disabled={!resumePreviewData?.data}
+            onPress={() => downloadFile("pdf")}
+            isLoading={loadingResumeDownload}
+          >
+            {downloadProgress === 0
+              ? "Download as PDF"
+              : `Downloading ${downloadProgress}%`}
+          </Button>
+          <Button
+            variant="contained"
+            disabled={!resumePreviewData?.data}
+            onPress={() => downloadFile("docx")}
+            isLoading={loadingResumeDownload}
+          >
+            {downloadProgress === 0
+              ? "Download as DOCX"
+              : `Downloading ${downloadProgress}%`}
           </Button>
         </Box>
       }
     >
       <Box flex={1}>
-        {isFetching ? (
+        {loadingResumePreview ? (
           <ActivityIndicator />
         ) : (
           <Box
             flex={1}
             borderRadius={8}
             overflow="hidden"
-            marginBottom="xl"
+            marginBottom="m"
             backgroundColor="dark"
           >
-            {/* <Text>{data?.data.resume_preview_url}</Text> */}
             <WebView
               incognito
               onHttpError={(e) => console.log("http error:", e)}
@@ -59,9 +117,10 @@ export default function PreviewAndDownload() {
                 // easing: Easing.cubic,
                 // })
               }}
-              // scalesPageToFit
               source={{
-                uri: data?.data.resume_preview_url ?? "https://google.com",
+                uri:
+                  resumePreviewData?.data.resume_preview_url ??
+                  "https://craftmycv.xyz",
               }}
             />
           </Box>

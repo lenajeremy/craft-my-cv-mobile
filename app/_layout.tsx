@@ -7,7 +7,7 @@ import store from "@/store";
 
 export default function RootLayout() {
   const isDarkMode = useColorScheme() === "dark";
-  const currentTheme = isDarkMode ? theme : theme;
+  const currentTheme = isDarkMode ? darkTheme : theme;
 
   return (
     <Provider store={store}>

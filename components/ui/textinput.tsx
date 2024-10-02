@@ -19,15 +19,16 @@ export type TextInputProps = {
 } & NativeTextInputProps;
 
 export default function TextInput(props: TextInputProps) {
-  const { containerProps, showLabel, label, ...inputProps } = props;
+  const { containerProps, showLabel, label, onBlur, ...inputProps } = props;
   const { colors, spacing, textVariants } = useTheme<Theme>();
+  const [focused, setFocused] = React.useState(false);
 
   const styles = React.useMemo(
     () =>
       StyleSheet.create({
         textInput: {
           ...textVariants.title,
-          lineHeight: 21,
+          // lineHeight: 24,
           flex: 1,
           color: colors.headingText,
           paddingVertical: props.variant === "outlined" ? spacing.s : 12,
@@ -39,7 +40,7 @@ export default function TextInput(props: TextInputProps) {
   return (
     <Box
       {...{
-        ...inputContainerPropsFromVariant(props.variant),
+        ...inputContainerPropsFromVariant(props.variant, focused),
         ...containerProps,
       }}
     >
@@ -60,6 +61,12 @@ export default function TextInput(props: TextInputProps) {
       >
         {props.PrefixElement}
         <NativeTextInput
+          onFocus={() => setFocused(true)}
+          autoCapitalize="none"
+          onBlur={(e) => {
+            onBlur && onBlur(e);
+            setFocused(false)
+          }}
           {...inputProps}
           // @ts-ignore
           style={[styles.textInput, inputProps.style]}
@@ -72,7 +79,8 @@ export default function TextInput(props: TextInputProps) {
 }
 
 function inputContainerPropsFromVariant(
-  v: TextInputProps["variant"]
+  v: TextInputProps["variant"],
+  focused: boolean
 ): BoxProps {
   if (v === "outlined") {
     return {
@@ -81,8 +89,8 @@ function inputContainerPropsFromVariant(
   } else {
     return {
       borderBottomWidth: 1,
-      borderBottomColor: "border",
-      paddingVertical: "s",
+      borderBottomColor: focused ? "primary" : "border",
+      paddingVertical: "xs",
     };
   }
 }
