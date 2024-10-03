@@ -83,7 +83,7 @@ const resumeApi = createApi({
                         courseStudied: edu.course_studied,
                         degree: edu.degree,
                         school: edu.school,
-                        grade: edu.grade,
+                        grade: edu.gpa,
                     })) || [],
                     others: res.data.other || {},
                     id: res.data.id,
@@ -121,7 +121,7 @@ const resumeApi = createApi({
                             end_date: education.endDate,
                             start_date: education.startDate,
                             course_studied: education.courseStudied,
-                            getPathDataFromState: education.grade,
+                            gpa: education.grade,
                             school: education.school
                         })),
                         professional_summary: rest.professionalSummary
