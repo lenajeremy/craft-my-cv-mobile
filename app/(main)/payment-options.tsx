@@ -1,3 +1,4 @@
+import React from "react";
 import Box from "@/components/ui/box";
 import Text from "@/components/ui/text";
 import ScreenContainer from "@/components/ui/screen-container";
@@ -13,15 +14,22 @@ import { Theme } from "@/theme";
 import RadioButton from "@/components/ui/radio";
 import Button from "@/components/ui/button";
 import { useAppSelector } from "@/hooks/redux";
+import { Plan } from "@/http/types";
 
 export default function PaymentOptions() {
   const { data, isLoading } = useGetAvailablePlansQuery();
-  const [selectedPlan, setSelectedPlan] = useState<any>();
+  const [selectedPlan, setSelectedPlan] = useState<Plan>();
   const { colors } = useTheme<Theme>();
   const { plan, userId } = useAppSelector((state) => state.user);
 
   const [subscribeToPlan, { isLoading: isSubscribing }] =
     useSubscribeToPlanMutation();
+
+  React.useEffect(() => {
+    if (data?.data && data.data.length > 0) {
+      setSelectedPlan(data.data[0]);
+    }
+  }, [data]);
 
   const handleSubscribe = async () => {
     if (!selectedPlan) return;
@@ -46,7 +54,11 @@ export default function PaymentOptions() {
         <Button
           isLoading={isSubscribing}
           variant="contained"
-          disabled={!selectedPlan || !plan.toLowerCase().includes("free")}
+          disabled={
+            !selectedPlan ||
+            selectedPlan.title.toLowerCase().includes("free") ||
+            !plan.toLowerCase().includes("free")
+          }
           onPress={handleSubscribe}
           textStyle={{ fontFamily: "Manrope-SemiBold" }}
         >

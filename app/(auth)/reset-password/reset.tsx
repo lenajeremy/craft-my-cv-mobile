@@ -6,6 +6,7 @@ import ScreenContainer from "@/components/ui/screen-container";
 import Text from "@/components/ui/text";
 import TextInput from "@/components/ui/textinput";
 import { router } from "expo-router";
+import { Pressable } from "react-native";
 
 function ResetPassword() {
   return (
@@ -27,7 +28,11 @@ function ResetPassword() {
           showLabel
           label="New Password"
           PrefixElement={<LockSVG />}
-          SuffixElement={<EyeSVG />}
+          renderSuffixElement={({ toggleTextVisibility, isVisible }) => (
+            <Pressable style={{ padding: 4 }} onPress={toggleTextVisibility}>
+              <EyeSVG closed={isVisible} />
+            </Pressable>
+          )}
           placeholder="Enter your new password"
         />
 
@@ -36,7 +41,11 @@ function ResetPassword() {
           showLabel
           label="Confirm new password"
           PrefixElement={<LockSVG />}
-          SuffixElement={<EyeSVG />}
+          renderSuffixElement={({ toggleTextVisibility, isVisible }) => (
+            <Pressable style={{ padding: 4 }} onPress={toggleTextVisibility}>
+              <EyeSVG closed={isVisible} />
+            </Pressable>
+          )}
           placeholder="Confirm your new password"
         />
       </Box>

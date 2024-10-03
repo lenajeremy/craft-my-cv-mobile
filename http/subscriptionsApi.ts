@@ -1,7 +1,7 @@
 import { BASE_URL } from "@/constants";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "@/store";
-import { ApiResponse } from "./types";
+import { ApiResponse, Plan } from "./types";
 
 
 const subscriptionsApi = createApi({
@@ -16,13 +16,7 @@ const subscriptionsApi = createApi({
         },
     }),
     endpoints: (build) => ({
-        getAvailablePlans: build.query<ApiResponse<{
-            title: string,
-            perks: string[],
-            id: string,
-            durationInMonths: number,
-            priceInDollars: number
-        }[]>, void>({
+        getAvailablePlans: build.query<ApiResponse<Plan[]>, void>({
             query: () => '/plans/all',
             transformResponse: (res: any) => ({
                 ...res,

@@ -59,3 +59,11 @@ export type Experience = {
 }
 
 export type Skill = string
+
+export type Plan = {
+    title: string,
+    perks: string[],
+    id: string,
+    durationInMonths: number,
+    priceInDollars: number
+}
