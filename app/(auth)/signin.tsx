@@ -72,8 +72,9 @@ export default function SignIn() {
             showLabel
             label="Email Address"
             variant="outlined"
+            keyboardType="email-address"
+            autoCapitalize="none"
             PrefixElement={<LoginEnvelopeSVG />}
-            style={{ lineHeight: 20 }}
             placeholder="johndoe@example.com"
           />
           <TextInput

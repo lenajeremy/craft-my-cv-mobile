@@ -63,10 +63,10 @@ export default function Signup() {
             showLabel
             label="Full name"
             variant="outlined"
+            autoCapitalize="words"
             value={signupForm.name}
             onChangeText={(t) => onChangeText("name", t)}
             PrefixElement={<UserProfileSVG />}
-            style={{ lineHeight: 20 }}
             placeholder="John Doe"
           />
 
@@ -74,10 +74,11 @@ export default function Signup() {
             showLabel
             label="Email Address"
             variant="outlined"
+            keyboardType="email-address"
+            autoCapitalize="none"
             value={signupForm.email}
             onChangeText={(t) => onChangeText("email", t)}
             PrefixElement={<LoginEnvelopeSVG />}
-            style={{ lineHeight: 20 }}
             placeholder="johndoe@example.com"
           />
 

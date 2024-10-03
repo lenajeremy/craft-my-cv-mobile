@@ -75,7 +75,6 @@ export default function TextInput(props: TextInputProps) {
         <NativeTextInput
           pointerEvents={props.disabled ? "none" : "auto"}
           onFocus={() => setFocused(true)}
-          autoCapitalize="none"
           onBlur={(e) => {
             onBlur && onBlur(e);
             setFocused(false);
@@ -83,6 +82,7 @@ export default function TextInput(props: TextInputProps) {
           {...inputProps}
           // @ts-ignore
           style={[styles.textInput, inputProps.style]}
+          autoCapitalize={props.autoCapitalize ?? "sentences"}
           secureTextEntry={isPassword}
         />
         {props.renderSuffixElement &&

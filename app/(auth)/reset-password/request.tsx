@@ -24,9 +24,11 @@ function RequestPasswordReset() {
         variant="outlined"
         showLabel
         label="Email Address"
-        PrefixElement={<LoginEnvelopeSVG />}
         placeholder="johndoe@crafymycv.com"
         containerProps={{ my: "l" }}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        PrefixElement={<LoginEnvelopeSVG />}
       />
       <Button
         variant="contained"
