@@ -28,7 +28,7 @@ export default function ResumeTemplatePreview({
         width={templateWidth}
         borderRadius={20}
         py="s"
-        flex = {0.85}
+        flex = {0.75}
         borderWidth={1}
         borderColor={selected ? "primaryFaded" : "border"}
         style={{ paddingHorizontal: 10 }}
@@ -37,12 +37,12 @@ export default function ResumeTemplatePreview({
           source={{ uri: image }}
           style={{
             width: "100%",
-            height: 400,
+            height: 350,
             marginBottom: 16,
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
           }}
-          resizeMode="cover"
+          resizeMode="contain"
         />
 
         <Box

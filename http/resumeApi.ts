@@ -2,6 +2,7 @@ import { BASE_URL } from "@/constants";
 import { RootState } from "@/store";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ApiResponse, Resume } from "./types";
+import { getPathDataFromState } from "expo-router/build/fork/getPathFromState";
 
 
 const resumeApi = createApi({
@@ -120,7 +121,7 @@ const resumeApi = createApi({
                             end_date: education.endDate,
                             start_date: education.startDate,
                             course_studied: education.courseStudied,
-                            grade: education.grade,
+                            getPathDataFromState: education.grade,
                             school: education.school
                         })),
                         professional_summary: rest.professionalSummary
