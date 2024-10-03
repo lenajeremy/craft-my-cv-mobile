@@ -7,11 +7,15 @@ import { Controller, SubmitHandler, useFormContext } from "react-hook-form";
 import { Resume } from "@/http/types";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEditResumeMutation } from "@/http/resumeApi";
+import DatePicker from "@/components/ui/date-picker";
+import { useTheme } from "@shopify/restyle";
+import { Theme } from "@/theme";
 
 export default function EditEducation() {
   const { educationId } = useLocalSearchParams();
   const { control, getValues, handleSubmit } = useFormContext<Resume>();
   const [editResume, { isLoading }] = useEditResumeMutation();
+  const { colors } = useTheme<Theme>();
 
   const education = getValues("education") || [];
   const educationIndex = education.findIndex((e) => e.id === educationId);
@@ -45,20 +49,6 @@ export default function EditEducation() {
       <Box gap="m">
         <Controller
           control={control}
-          name={`education.${educationIndex}.degree`}
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextInput
-              showLabel
-              label="Degree"
-              placeholder="Bachelor's"
-              onChangeText={(text) => onChange(text)}
-              onBlur={onBlur}
-              value={value as string}
-            />
-          )}
-        />
-        <Controller
-          control={control}
           name={`education.${educationIndex}.school`}
           render={({ field: { value, onChange, onBlur } }) => (
             <TextInput
@@ -72,50 +62,20 @@ export default function EditEducation() {
           )}
         />
 
-        <Box gap="l" flexDirection="row">
-          <Controller
-            control={control}
-            name={`education.${educationIndex}.startDate`}
-            render={({ field: { value, onChange, onBlur } }) => (
-              <TextInput
-                showLabel
-                label="Duration"
-                placeholder="Start Date"
-                containerProps={{ flex: 1 }}
-                onChangeText={(text) => {
-                  if (Number.isNaN(new Date(text).getTime())) {
-                    onChange(new Date());
-                  } else {
-                    onChange(new Date(text));
-                  }
-                }}
-                onBlur={onBlur}
-                value={value?.toDateString()}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name={`education.${educationIndex}.endDate`}
-            render={({ field: { value, onChange, onBlur } }) => (
-              <TextInput
-                placeholder="End Date"
-                containerProps={{ flex: 1 }}
-                showLabel
-                label=""
-                onChangeText={(text) => {
-                  if (Number.isNaN(new Date(text).getTime())) {
-                    onChange(new Date());
-                  } else {
-                    onChange(new Date(text));
-                  }
-                }}
-                onBlur={onBlur}
-                value={value?.toDateString()}
-              />
-            )}
-          />
-        </Box>
+        <Controller
+          control={control}
+          name={`education.${educationIndex}.degree`}
+          render={({ field: { value, onChange, onBlur } }) => (
+            <TextInput
+              showLabel
+              label="Degree"
+              placeholder="Bachelor's"
+              onChangeText={(text) => onChange(text)}
+              onBlur={onBlur}
+              value={value as string}
+            />
+          )}
+        />
 
         <Controller
           control={control}
@@ -131,6 +91,43 @@ export default function EditEducation() {
             />
           )}
         />
+
+        <Box gap="l" flexDirection="row">
+          <Controller
+            control={control}
+            name={`education.${educationIndex}.startDate`}
+            render={({ field: { value, onChange, onBlur } }) => (
+              <DatePicker
+                datePickerContainerProps={{ flex: 1 }}
+                currentDate={value}
+                onChange={onChange}
+                onBlur={onBlur}
+                showLabel
+                label="Start Date"
+                placeholder="Start Date"
+                selectionColor={colors.primary}
+                cursorColor={colors.primary}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name={`education.${educationIndex}.endDate`}
+            render={({ field: { value, onChange, onBlur } }) => (
+              <DatePicker
+                datePickerContainerProps={{ flex: 1 }}
+                currentDate={value}
+                onChange={onChange}
+                onBlur={onBlur}
+                showLabel
+                label="End Date"
+                placeholder="Start Date"
+                selectionColor={colors.primary}
+                cursorColor={colors.primary}
+              />
+            )}
+          />
+        </Box>
 
         <Controller
           control={control}

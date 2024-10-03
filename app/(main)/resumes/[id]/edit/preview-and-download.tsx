@@ -1,6 +1,5 @@
 import * as React from "react";
 import Box from "@/components/ui/box";
-import Text from "@/components/ui/text";
 import Button from "@/components/ui/button";
 import ScreenContainer from "@/components/ui/screen-container";
 import WebView from "react-native-webview";
@@ -10,8 +9,6 @@ import {
 } from "@/http/resumeApi";
 import { ActivityIndicator, Alert } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { useTheme } from "@shopify/restyle";
-import { Theme } from "@/theme";
 import { saveFileToDevice } from "@/utils/file-download";
 import { useFormContext } from "react-hook-form";
 import { Resume } from "@/http/types";
@@ -29,7 +26,6 @@ export default function PreviewAndDownload() {
     useLazyDownloadResumeQuery();
 
   const { getValues } = useFormContext<Resume>();
-  const { spacing } = useTheme<Theme>();
   const [downloadProgress, setDownloadProgress] = React.useState(0);
 
   const shareFile = async (uri: string) => {

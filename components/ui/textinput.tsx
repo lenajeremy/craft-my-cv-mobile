@@ -12,6 +12,7 @@ import { Theme } from "@/theme";
 export type TextInputProps = {
   showLabel?: boolean;
   label?: string;
+  disabled?: boolean;
   containerProps?: BoxProps;
   variant?: "outlined" | "underline";
   PrefixElement?: React.ReactNode;
@@ -72,6 +73,7 @@ export default function TextInput(props: TextInputProps) {
       >
         {props.PrefixElement}
         <NativeTextInput
+          pointerEvents={props.disabled ? "none" : "auto"}
           onFocus={() => setFocused(true)}
           autoCapitalize="none"
           onBlur={(e) => {
