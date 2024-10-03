@@ -18,7 +18,6 @@ import { Link } from "expo-router";
 import UserProfileSVG from "@/assets/icons/user";
 import { useRegisterMutation } from "@/http/authApi";
 
-
 export default function Signup() {
   const { colors } = useTheme<Theme>();
   const [register, { isLoading }] = useRegisterMutation();
@@ -33,21 +32,19 @@ export default function Signup() {
 
   const handleSignUp = async () => {
     try {
+      const res = await register({
+        name: signupForm.name,
+        email: signupForm.email,
+        password: signupForm.password,
+        conf_password: signupForm.confPassword,
+        accept_t_and_c: signupForm.acceptsTerms,
+      }).unwrap();
 
-    const res = await register({
-      name: signupForm.name,
-      email: signupForm.email,
-      password: signupForm.password,
-      conf_password: signupForm.confPassword,
-      accept_t_and_c: signupForm.acceptsTerms,
-    }).unwrap();
-
-    console.log(JSON.stringify(res))
-    
-  } catch (error) {
-    console.error(error)
-    // Burnt.toast({ message: error.data.data.error, preset: 'error', title: "Error logging in"})
-  }
+      console.log(JSON.stringify(res));
+    } catch (error) {
+      console.error(error);
+      // Burnt.toast({ message: error.data.data.error, preset: 'error', title: "Error logging in"})
+    }
   };
 
   function onChangeText(key: string, value: string | boolean) {
@@ -59,7 +56,7 @@ export default function Signup() {
 
   return (
     <ScreenContainer ScreenHeaderComponent={<AuthScreenHeader />} scrollable>
-      <Box my="m" px="s">
+      <Box my="xl" px="s">
         <Text variant="h1">Create an account</Text>
         <Box gap="m" mt="default">
           <TextInput
@@ -93,11 +90,11 @@ export default function Signup() {
             variant="outlined"
             placeholder="Create a password"
             PrefixElement={<LockSVG />}
-            SuffixElement={
-              <Pressable style={{ padding: 4 }}>
-                <EyeSVG />
+            renderSuffixElement={({ toggleTextVisibility, isVisible }) => (
+              <Pressable style={{ padding: 4 }} onPress={toggleTextVisibility}>
+                <EyeSVG closed = {isVisible} />
               </Pressable>
-            }
+            )}
           />
 
           <TextInput
@@ -109,11 +106,11 @@ export default function Signup() {
             variant="outlined"
             placeholder="Confirm your password"
             PrefixElement={<LockSVG />}
-            SuffixElement={
-              <Pressable style={{ padding: 4 }}>
-                <EyeSVG />
+            renderSuffixElement={({ toggleTextVisibility, isVisible }) => (
+              <Pressable style={{ padding: 4 }} onPress={toggleTextVisibility}>
+                <EyeSVG closed = {isVisible} />
               </Pressable>
-            }
+            )}
           />
         </Box>
 

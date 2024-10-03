@@ -15,13 +15,24 @@ export type TextInputProps = {
   containerProps?: BoxProps;
   variant?: "outlined" | "underline";
   PrefixElement?: React.ReactNode;
-  SuffixElement?: React.ReactNode;
+  renderSuffixElement?: (props: {
+    toggleTextVisibility: () => void;
+    isVisible: boolean;
+  }) => React.ReactNode;
 } & NativeTextInputProps;
 
 export default function TextInput(props: TextInputProps) {
-  const { containerProps, showLabel, label, onBlur, ...inputProps } = props;
+  const {
+    containerProps,
+    showLabel,
+    label,
+    onBlur,
+    secureTextEntry,
+    ...inputProps
+  } = props;
   const { colors, spacing, textVariants } = useTheme<Theme>();
   const [focused, setFocused] = React.useState(false);
+  const [isPassword, setIsPassword] = React.useState(secureTextEntry || false);
 
   const styles = React.useMemo(
     () =>
@@ -55,7 +66,7 @@ export default function TextInput(props: TextInputProps) {
         flexDirection="row"
         gap="s"
         style={{ padding: props.variant === "outlined" ? 10 : 0 }}
-        borderColor="border"
+        borderColor={focused ? "primary" : "border"}
         borderWidth={props.variant === "outlined" ? 1 : 0}
         alignItems="center"
       >
@@ -65,14 +76,18 @@ export default function TextInput(props: TextInputProps) {
           autoCapitalize="none"
           onBlur={(e) => {
             onBlur && onBlur(e);
-            setFocused(false)
+            setFocused(false);
           }}
           {...inputProps}
           // @ts-ignore
           style={[styles.textInput, inputProps.style]}
-          placeholderTextColor={colors.mutedText + "50"}
+          secureTextEntry={isPassword}
         />
-        {props.SuffixElement}
+        {props.renderSuffixElement &&
+          props.renderSuffixElement({
+            isVisible: isPassword,
+            toggleTextVisibility: () => setIsPassword(!isPassword),
+          })}
       </Box>
     </Box>
   );

@@ -102,7 +102,7 @@ export default function PreviewAndDownload() {
             borderRadius={8}
             overflow="hidden"
             marginBottom="m"
-            backgroundColor="dark"
+            position="relative"
           >
             <WebView
               incognito

@@ -87,11 +87,11 @@ export default function SignIn() {
             variant="outlined"
             placeholder="Enter your password"
             PrefixElement={<LockSVG />}
-            SuffixElement={
-              <Pressable style={{ padding: 4 }}>
-                <EyeSVG />
+            renderSuffixElement={({ toggleTextVisibility, isVisible }) => (
+              <Pressable style={{ padding: 4 }} onPress={toggleTextVisibility}>
+                <EyeSVG closed = {isVisible} />
               </Pressable>
-            }
+            )}
           />
         </Box>
         <Link
