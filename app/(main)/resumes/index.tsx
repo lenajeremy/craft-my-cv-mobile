@@ -39,7 +39,7 @@ export default function Resumes() {
       }).unwrap();
 
       router.replace({
-        pathname: `/resumes/[id]/edit`,
+        pathname: `/resumes/[id]/select-input-method`,
         params: { id: res.data.resume_id },
       });
     } catch (error) {

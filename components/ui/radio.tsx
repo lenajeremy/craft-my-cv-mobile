@@ -1,15 +1,23 @@
+import { useTheme } from "@shopify/restyle";
 import Box from "./box";
 import { Pressable } from "react-native";
+import { Theme } from "@/theme";
 
 export default function RadioButton({
   checked,
   onPress,
   value,
+  activeColor,
+  inactiveColor,
 }: {
   checked: boolean;
   onPress: (v: string) => void;
   value: string;
+  inactiveColor?: string;
+  activeColor?: string;
 }) {
+  const { colors } = useTheme<Theme>();
+
   return (
     <Pressable onPress={() => onPress(value)}>
       <Box
@@ -19,14 +27,20 @@ export default function RadioButton({
         justifyContent="center"
         alignItems="center"
         borderWidth={2}
-        borderColor={"primary"}
+        style={{
+          borderColor: checked
+            ? activeColor ?? colors.primary
+            : inactiveColor ?? colors.primary,
+        }}
       >
         {checked && (
           <Box
             height={11}
             width={11}
             borderRadius={100}
-            backgroundColor="primary"
+            style={{
+              backgroundColor: activeColor ?? colors.primary,
+            }}
           />
         )}
       </Box>
