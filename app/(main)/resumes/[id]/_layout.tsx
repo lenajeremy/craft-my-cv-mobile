@@ -38,7 +38,7 @@ export default function ResumeEditLayout() {
           ...data.data,
           experiences: data.data.experiences?.map((exp) => ({
             ...exp,
-            startDate: new Date(exp.startDate),
+            startDate: exp.startDate === 'Present' ? "Present" : new Date(exp.startDate),
             endDate: new Date(exp.endDate),
           })),
           education: data.data.education?.map((edu) => ({

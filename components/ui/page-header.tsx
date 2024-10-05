@@ -1,3 +1,4 @@
+import React from "react";
 import { Pressable } from "react-native";
 import Box from "./box";
 import Text from "./text";
@@ -13,7 +14,7 @@ export default function PageHeader({ title }: { title: string }) {
 
   return (
     <Box
-      py="default"
+      py="m"
       alignItems="center"
       flexDirection="row"
       justifyContent={showBackButton ? "space-between" : "center"}

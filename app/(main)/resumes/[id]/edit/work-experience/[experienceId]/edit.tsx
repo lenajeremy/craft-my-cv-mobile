@@ -1,5 +1,6 @@
 import * as React from "react";
 import Box from "@/components/ui/box";
+import Text from "@/components/ui/text";
 import ScreenContainer from "@/components/ui/screen-container";
 import TextInput from "@/components/ui/textinput";
 import Button from "@/components/ui/button";
@@ -10,11 +11,13 @@ import { useEditResumeMutation } from "@/http/resumeApi";
 import DatePicker from "@/components/ui/date-picker";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
+import { Switch } from "react-native";
 
 export default function EditWorkExperience() {
   const { colors } = useTheme<Theme>();
   const { experienceId } = useLocalSearchParams();
-  const { control, handleSubmit, getValues } = useFormContext<Resume>();
+  const { control, handleSubmit, getValues, setValue } =
+    useFormContext<Resume>();
   const [editResume, { isLoading }] = useEditResumeMutation();
   const experiences = getValues("experiences");
   const experienceIndex =
@@ -116,6 +119,26 @@ export default function EditWorkExperience() {
               />
             )}
           />
+        </Box>
+
+        <Box
+          flexDirection="row"
+          gap="s"
+          alignItems="center"
+          style={{ marginTop: -10 }}
+        >
+          <Switch
+            value={
+              getValues(`experiences.${experienceIndex}.endDate`) === "Present"
+            }
+            onValueChange={(isSwitchOn) =>
+              setValue(
+                `experiences.${experienceIndex}.endDate`,
+                isSwitchOn ? "Present" : new Date()
+              )
+            }
+          />
+          <Text>Currently work here</Text>
         </Box>
 
         <Controller

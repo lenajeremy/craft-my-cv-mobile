@@ -42,19 +42,21 @@ export type Education = {
     id: string;
     school: string;
     degree: string;
-    startDate: Date;
-    endDate: Date;
+    startDate: LikeDate;
+    endDate: LikeDate;
     grade: string;
     courseStudied: string;
 }
+
+export type LikeDate = Date | "Present"
 
 export type Experience = {
     company: string;
     location: string;
     responsibilities: string;
     role: string;
-    startDate: Date;
-    endDate: Date;
+    startDate: LikeDate;
+    endDate: LikeDate;
     id: string;
 }
 

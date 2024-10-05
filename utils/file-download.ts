@@ -1,5 +1,4 @@
 import * as FileSystem from 'expo-file-system';
-import { Alert } from 'react-native';
 
 
 const filePath = (name: string) => `${FileSystem.cacheDirectory}/${name}`
