@@ -62,7 +62,7 @@ export default function Skills() {
         </Box>
 
         <Box alignItems="center">
-          <Button variant="contained" onPress={() => router.push("./professional-summary")}>
+          <Button variant="contained" onPress={() => router.replace("./professional-summary")}>
             Save
           </Button>
         </Box>

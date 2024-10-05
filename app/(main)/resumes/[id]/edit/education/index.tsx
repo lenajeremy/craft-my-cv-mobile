@@ -5,7 +5,7 @@ import Button from "@/components/ui/button";
 import CardLink from "@/components/ui/card-link";
 import ScreenContainer from "@/components/ui/screen-container";
 import { Resume } from "@/http/types";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useFormContext } from "react-hook-form";
 import uuid from "react-native-uuid";
 import { Pressable } from "react-native";
@@ -15,6 +15,7 @@ export default function Education() {
   const router = useRouter();
   const { watch, setValue } = useFormContext<Resume>();
   const education = watch("education") || [];
+  const { id } = useLocalSearchParams<{ id: string }>();
 
   const handleAddEducation = () => {
     const newEducation = {
@@ -40,7 +41,24 @@ export default function Education() {
   };
 
   return (
-    <ScreenContainer showHeaderTitle headerTitle="Education">
+    <ScreenContainer
+      showHeaderTitle
+      headerTitle="Education"
+      ScreenFooterComponent={
+        <Button
+          variant="contained"
+          onPress={() =>
+            router.replace({
+              pathname: "/resumes/[id]/edit/skills",
+              params: { id },
+            })
+          }
+          buttonStyles={{ alignSelf: "center", marginVertical: 8 }}
+        >
+          Next
+        </Button>
+      }
+    >
       <Box gap="m" mt="default">
         {education.length === 0 ? (
           <Box alignItems="center" my="l">

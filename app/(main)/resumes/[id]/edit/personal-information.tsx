@@ -25,7 +25,7 @@ export default function PersonalInformation() {
     }).unwrap()
 
     if(res.success) {
-      router.push({
+      router.replace({
         pathname: "/resumes/[id]/edit/work-experience",
         params: {
           id: value.id

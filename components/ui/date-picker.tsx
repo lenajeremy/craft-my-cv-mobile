@@ -4,6 +4,7 @@ import { BoxProps, useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
 import TextInput, { TextInputProps } from "./textinput";
 import Box from "./box";
+import Text from "./text";
 import { StyleSheet } from "react-native";
 import { LikeDate } from "@/http/types";
 
@@ -36,8 +37,9 @@ export default function DatePicker({
   return (
     <Box {...datePickerContainerProps}>
       <Box position="relative">
+        <Text>{String(currentDate)}</Text>
         <TextInput {...inputProps} value={dateText} disabled />
-        <DateTimePicker
+        {/* <DateTimePicker
           accentColor={colors.primary}
           style={{
             ...StyleSheet.absoluteFillObject,
@@ -49,7 +51,7 @@ export default function DatePicker({
           value={currentDate === "Present" ? new Date() : currentDate}
           mode="date"
           onChange={(_, selectedDate) => selectedDate && onChange(selectedDate)}
-        />
+        /> */}
       </Box>
     </Box>
   );

@@ -10,4 +10,4 @@ export const FONTS = {
 
 export type Font = keyof typeof FONTS
 
-export const BASE_URL = "https://craftmycv.xyz"
+export const BASE_URL = "https://af64-102-89-32-239.ngrok-free.app"

@@ -24,8 +24,6 @@ export default function EditWorkExperience() {
     experiences?.findIndex((experience) => experience.id === experienceId) || 0;
 
   const onSubmit: SubmitHandler<Resume> = async (data) => {
-    console.log(data);
-    console.log(getValues());
     try {
       await editResume(data).unwrap();
       router.canGoBack() && router.back();

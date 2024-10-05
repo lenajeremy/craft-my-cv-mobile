@@ -5,7 +5,7 @@ import Button from "@/components/ui/button";
 import CardLink from "@/components/ui/card-link";
 import ScreenContainer from "@/components/ui/screen-container";
 import { Resume } from "@/http/types";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useFormContext } from "react-hook-form";
 import uuid from "react-native-uuid";
 import { Pressable } from "react-native";
@@ -14,6 +14,7 @@ import TrashSVG from "@/assets/icons/trash";
 export default function WorkExperience() {
   const router = useRouter();
   const { watch, setValue } = useFormContext<Resume>();
+  const { id } = useLocalSearchParams<{ id: string }>();
 
   const workExperience = watch("experiences");
 
@@ -38,11 +39,31 @@ export default function WorkExperience() {
   };
 
   const onDeleteExperience = (id: string) => {
-    setValue('experiences', workExperience?.filter(exp => exp.id !== id) || [])
-  }
+    setValue(
+      "experiences",
+      workExperience?.filter((exp) => exp.id !== id) || []
+    );
+  };
 
   return (
-    <ScreenContainer showHeaderTitle headerTitle="Work Experience">
+    <ScreenContainer
+      showHeaderTitle
+      headerTitle="Work Experience"
+      ScreenFooterComponent={
+        <Button
+          variant="contained"
+          onPress={() =>
+            router.replace({
+              pathname: "/resumes/[id]/edit/education",
+              params: { id },
+            })
+          }
+          buttonStyles={{ alignSelf: "center", marginVertical: 8 }}
+        >
+          Next
+        </Button>
+      }
+    >
       <Box gap="m" mt="default">
         {workExperience && workExperience.length > 0 ? (
           workExperience.map((experience) => (
@@ -57,7 +78,7 @@ export default function WorkExperience() {
                 <Pressable
                   onPress={(e) => {
                     e.stopPropagation();
-                    onDeleteExperience(experience.id)
+                    onDeleteExperience(experience.id);
                   }}
                   style={{
                     backgroundColor: "#FCECEC",
