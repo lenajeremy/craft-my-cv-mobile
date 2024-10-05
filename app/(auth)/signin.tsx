@@ -90,7 +90,7 @@ export default function SignIn() {
             PrefixElement={<LockSVG />}
             renderSuffixElement={({ toggleTextVisibility, isVisible }) => (
               <Pressable style={{ padding: 4 }} onPress={toggleTextVisibility}>
-                <EyeSVG closed = {isVisible} />
+                <EyeSVG closed={isVisible} />
               </Pressable>
             )}
           />

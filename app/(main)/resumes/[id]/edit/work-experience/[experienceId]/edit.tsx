@@ -4,19 +4,21 @@ import ScreenContainer from "@/components/ui/screen-container";
 import TextInput from "@/components/ui/textinput";
 import Button from "@/components/ui/button";
 import { router, useLocalSearchParams } from "expo-router";
-import { Controller, SubmitHandler,  useFormContext } from "react-hook-form";
+import { Controller, SubmitHandler, useFormContext } from "react-hook-form";
 import { Resume } from "@/http/types";
 import { useEditResumeMutation } from "@/http/resumeApi";
-
+import DatePicker from "@/components/ui/date-picker";
+import { useTheme } from "@shopify/restyle";
+import { Theme } from "@/theme";
 
 export default function EditWorkExperience() {
+  const { colors } = useTheme<Theme>();
   const { experienceId } = useLocalSearchParams();
   const { control, handleSubmit, getValues } = useFormContext<Resume>();
   const [editResume, { isLoading }] = useEditResumeMutation();
   const experiences = getValues("experiences");
   const experienceIndex =
     experiences?.findIndex((experience) => experience.id === experienceId) || 0;
-
 
   const onSubmit: SubmitHandler<Resume> = async (data) => {
     console.log(data);
@@ -82,21 +84,17 @@ export default function EditWorkExperience() {
           <Controller
             control={control}
             name={`experiences.${experienceIndex}.startDate`}
-            render={({ field }) => (
-              <TextInput
+            render={({ field: { value, onChange, onBlur } }) => (
+              <DatePicker
+                datePickerContainerProps={{ flex: 1 }}
+                currentDate={value}
+                onChange={onChange}
+                onBlur={onBlur}
                 showLabel
-                label="Time"
+                label="Start Date"
                 placeholder="Start Date"
-                onBlur={field.onBlur}
-                onChangeText={(text) => {
-                  if (Number.isNaN(new Date(text).getTime())) {
-                    field.onChange(new Date(text));
-                  } else {
-                    field.onChange(new Date());
-                  }
-                }}
-                value={field.value?.toDateString()}
-                containerProps={{ flex: 1 }}
+                selectionColor={colors.primary}
+                cursorColor={colors.primary}
               />
             )}
           />
@@ -104,21 +102,17 @@ export default function EditWorkExperience() {
           <Controller
             control={control}
             name={`experiences.${experienceIndex}.endDate`}
-            render={({ field }) => (
-              <TextInput
-                placeholder="End Date"
-                containerProps={{ flex: 1 }}
+            render={({ field: { value, onChange, onBlur } }) => (
+              <DatePicker
+                datePickerContainerProps={{ flex: 1 }}
+                currentDate={value}
+                onChange={onChange}
+                onBlur={onBlur}
                 showLabel
-                label=""
-                onBlur={field.onBlur}
-                onChangeText={(text) => {
-                  if (Number.isNaN(new Date(text).getTime())) {
-                    field.onChange(new Date(text));
-                  } else {
-                    field.onChange(new Date());
-                  }
-                }}
-                value={field.value?.toDateString()}
+                label="End Date"
+                placeholder="End Date"
+                selectionColor={colors.primary}
+                cursorColor={colors.primary}
               />
             )}
           />

@@ -39,7 +39,7 @@ export default function Signup() {
         conf_password: signupForm.confPassword,
         accept_t_and_c: signupForm.acceptsTerms,
       }).unwrap();
-
+ 
       console.log(JSON.stringify(res));
     } catch (error) {
       console.error(error);
