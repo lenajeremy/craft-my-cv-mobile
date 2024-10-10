@@ -5,7 +5,7 @@ import { Theme } from "@/theme";
 import TextInput, { TextInputProps } from "./textinput";
 import Box from "./box";
 import Text from "./text";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { LikeDate } from "@/http/types";
 
 export type DatePickerProps = {
@@ -34,25 +34,34 @@ export default function DatePicker({
     }
   }, [currentDate, presentSelectionText]);
 
-  return (
-    <Box {...datePickerContainerProps}>
-      <Box position="relative">
-        <Text>{String(currentDate)}</Text>
-        <TextInput {...inputProps} value={dateText} disabled />
-        {/* <DateTimePicker
-          accentColor={colors.primary}
-          style={{
-            ...StyleSheet.absoluteFillObject,
-            opacity: 0.011,
-            top: "30%",
-            height: "70%",
-            width: "70%",
-          }}
-          value={currentDate === "Present" ? new Date() : currentDate}
-          mode="date"
-          onChange={(_, selectedDate) => selectedDate && onChange(selectedDate)}
-        /> */}
+  if (Platform.OS === "ios") {
+    return (
+      <Box {...datePickerContainerProps}>
+        <Box position="relative">
+          <TextInput {...inputProps} value={dateText} disabled />
+          <DateTimePicker
+            accentColor={colors.primary}
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              opacity: 0.011,
+              top: "30%",
+              height: "70%",
+              width: "70%",
+            }}
+            value={currentDate === "Present" ? new Date() : currentDate}
+            mode="date"
+            onChange={(_, selectedDate) =>
+              selectedDate && onChange(selectedDate)
+            }
+          />
+        </Box>
       </Box>
-    </Box>
-  );
+    );
+  } else {
+    return (
+      <Box {...datePickerContainerProps}>
+        <Text>Hello</Text>
+      </Box>
+    );
+  }
 }

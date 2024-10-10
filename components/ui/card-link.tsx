@@ -27,7 +27,7 @@ export default function CardLink(props: CardLinkProps) {
           alignItems="center"
           {...props.containerProps}
         >
-          <Text variant="h3" font="Manrope-Regular">
+          <Text variant="h3" font="Manrope-Regular" fontWeight={'normal'}>
             {props.title}
           </Text>
           {props.SuffixElement ? props.SuffixElement : <ArrowRightSVG />}

@@ -62,7 +62,7 @@ const theme = createTheme({
             fontWeight: 'normal',
             color: "headingText",
             lineHeight: 26,
-            fontFamily: "Manrope-Semibold" as Font
+            fontFamily: "Manrope-SemiBold" as Font
         },
         body: {
             fontSize: 17,

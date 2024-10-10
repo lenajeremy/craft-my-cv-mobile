@@ -5,7 +5,7 @@ import Text from "@/components/ui/text";
 import { useGetResumeByIDQuery } from "@/http/resumeApi";
 import { Resume } from "@/http/types";
 import { Theme } from "@/theme";
-import { backgroundColor, useTheme } from "@shopify/restyle";
+import { useTheme } from "@shopify/restyle";
 import { Stack, useLocalSearchParams } from "expo-router";
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
@@ -62,7 +62,7 @@ export default function ResumeEditLayout() {
     })();
   }, [data, formMethods]);
 
-  const { width: DEVICE_WIDTH, height: DEVICE_HEIGHT } = useWindowDimensions();
+  const { height: DEVICE_HEIGHT } = useWindowDimensions();
 
   if (isFetching) {
     return (

@@ -40,10 +40,11 @@ export default function TextInput(props: TextInputProps) {
       StyleSheet.create({
         textInput: {
           ...textVariants.title,
+          fontFamily: "Manrope-Regular",
           // lineHeight: 24,
           flex: 1,
           color: colors.headingText,
-          paddingVertical: props.variant === "outlined" ? spacing.s : 12,
+          paddingVertical: props.variant === "outlined" ? spacing.xs : 12,
         },
       }),
     [spacing, textVariants, props.variant, colors]
@@ -75,6 +76,7 @@ export default function TextInput(props: TextInputProps) {
         <NativeTextInput
           pointerEvents={props.disabled ? "none" : "auto"}
           onFocus={() => setFocused(true)}
+          cursorColor={colors.primary}
           onBlur={(e) => {
             onBlur && onBlur(e);
             setFocused(false);
